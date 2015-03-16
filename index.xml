@@ -490,7 +490,7 @@
 			  var imgPrev = '<img ' + srcRegexp.exec(img1) + ' class="imgPreview" />';
 			  
 			  // Return the image
-			  return imgPrev
+			  return imgPrev;
 		  } else {
 		  	return '';
 	  	  }
