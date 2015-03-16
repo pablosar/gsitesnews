@@ -21,6 +21,16 @@
 			h1, h2, h3, h4, h5, h6 {
 				font-family: "Trebuchet MS", Helvetica, sans-serif;
 			}
+			a {
+				color: #d10000;
+				text-decoration: none;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			a:visited {
+				color: #8b0000;
+			}
 			#slideshow {
 				position: relative;
 				left: 60px;
@@ -324,8 +334,8 @@
 					var prev = '1';
 					var next = '1';
 					
-					var slide = '<h3><a href="' + feed.Entry[i].Link + '" target="_top">' + feed.Entry[i].Title + '</a></h3>';
-					slide += '<p>' + feed.Entry[i].Summary + '</p>';
+					var slide = '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
+					slide += '<p>' + getIntro(feed.Entry[i].Summary) + '</p>';
 					slides += '<li><div id="slide' + id + '">' + slide + '</div></li>';
 					
 					pages += '<li><a href="#query_' + id + '" id="page' + id + '" title="Go to the slide ' + id + '">&nbsp;</a></li>';
@@ -436,6 +446,7 @@
 			
 			return res;
 		}
+		
 		function getIntro(cont) {
 		  var newLine = cont.replace(/(<br\/>|<br>)/ig, '|n|');
 		  var endPos = newLine.search(/(<hr\/>|<hr>)/);
@@ -450,11 +461,14 @@
 		    res = res.replace('|n|', '<br>');
 		  }
 		  
-		  res = res.substring(0, maxChars);
-		  res = res.substring(0, res.lastIndexOf(" "));
+		  if(res.length > maxChars) {
+		  	res = res.substring(0, maxChars);
+		  	res = res.substring(0, res.lastIndexOf(" "));
+		  }
 		  
 		  return res;
 		}
+		
 		gadgets.util.registerOnLoadHandler(getHtml);
 	</script>
 </html>]]>
