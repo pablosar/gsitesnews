@@ -21,16 +21,6 @@
 			h1, h2, h3, h4, h5, h6 {
 				font-family: "Trebuchet MS", Helvetica, sans-serif;
 			}
-			a {
-				color: #d10000;
-				text-decoration: none;
-			}
-			a:hover {
-				text-decoration: underline;
-			}
-			a:visited {
-				color: #8b0000;
-			}
 			#slideshow {
 				position: relative;
 				left: 60px;
@@ -48,6 +38,16 @@
 				box-shadow: 2px 2px 2px gray;				
 				position: relative;				
 				overflow: hidden;
+			}
+			#slider a {
+				color: #d10000;
+				text-decoration: none;
+			}
+			#slider a:hover {
+				text-decoration: underline;
+			}
+			#slider a:visited {
+				color: #8b0000;
 			}
 			#slider_inner, #slider_anim {
 				position: absolute;
