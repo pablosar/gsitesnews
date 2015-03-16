@@ -472,8 +472,6 @@
 		  	res = res.substring(0, res.lastIndexOf(" ")) + '...';
 		  }
 		  
-		  document.getElementById('extra').innerHTML += cont + '<br>';
-		  
 		  return res;
 		}
 		
