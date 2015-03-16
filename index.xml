@@ -286,8 +286,6 @@
 		};
 			
 		function makeSlides(obj) {
-			alert(obj);
-			
 			// obj.data contains the feed data
 			var feed = obj.data;
 			
