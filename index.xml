@@ -8,13 +8,14 @@
   <UserPref name="time" display_name="Transitions length (in seconds)" required="true" default_value="4"/>
   <UserPref name="width" display_name="Slider Width" required="true" default_value="350"/>
   <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
+  <UserPref name="max_chars" display_name="Maximum Characters to Show" required="true" default_value="100"/>
    <Content type="html"><![CDATA[<html>
 	<head>	
 		<style>
 			@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 			body {
 			  font-family: 'Open Sans';
-			  font-weight: 100;
+			  font-weight: 400;
 			  font-size: 10pt;
 			}
 			h1, h2, h3, h4, h5, h6 {
@@ -276,7 +277,8 @@
 		var w = 350;
 		var h = 200;
 		var t = 4;
-		var bg = '#f9f9f9'
+		var bg = '#f9f9f9';
+		var maxChars = 100;
 		
 		function getHtml() {
 		  var prefs = new gadgets.Prefs();
@@ -285,6 +287,7 @@
 		  t = prefs.getInt("time");
 		  w = prefs.getInt("width");
 		  h = prefs.getInt("height");
+		  maxChars = prefs.getInt("max_chars");
 		  var params = {};  		  
 		  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
 		  params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(10);  
@@ -433,7 +436,25 @@
 			
 			return res;
 		}
-		
+		function getIntro(cont) {
+		  var newLine = cont.replace(/(<br\/>|<br>)/ig, '|n|');
+		  var endPos = newLine.search(/(<hr\/>|<hr>)/);
+		  var regex = /(<([^>]+)>)/ig;
+		    
+		  if(endPos > 0) {    
+		    var intro = newLine.slice(0, endPos);    
+		    var res = intro.replace(regex, ''); 
+		    res = res.replace('|n|', '<br>');
+		  } else {
+		    var res = newLine.replace(regex, ''); 
+		    res = res.replace('|n|', '<br>');
+		  }
+		  
+		  res = res.substring(0, maxChars);
+		  res = res.substring(0, res.lastIndexOf(" "));
+		  
+		  return res;
+		}
 		gadgets.util.registerOnLoadHandler(getHtml);
 	</script>
 </html>]]>
