@@ -276,13 +276,13 @@
 		  var url = prefs.getString("rss_url");
 		  bg = prefs.getString("bg");
 		  t = prefs.getInt("time");
-		  document.getElementById("extra").innerHTML = prefs.getString("width");
+		  //document.getElementById("extra").innerHTML = prefs.getString("width");
 		  var params = {};  		  
 		  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
 		  params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(10);  
 		  params[gadgets.io.RequestParameters.GET_SUMMARIES] = true;   
 		    
-		  //gadgets.io.makeRequest(url, makeSlides, params);
+		  gadgets.io.makeRequest(url, makeSlides, params);
 		};
 			
 		function makeSlides(obj) {
