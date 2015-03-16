@@ -11,7 +11,7 @@
   <UserPref name="max_chars" display_name="Maximum Characters to Show" required="true" default_value="100"/>
    <Content type="html"><![CDATA[<html>
 	<head>	
-		<link rel="stylesheet" type="text/css" href="basic.css">		
+		<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/pablosar/gsitesnews/master/basic.css">		
 	</head>
 	<body>
 		<span id="query_play"></span>
