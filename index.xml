@@ -281,7 +281,6 @@
 				<div id="out_pages"></div>
 			</div>
 		</div>
-		<div id="extra"></div>
 	</body>
 	<script type="text/javascript">		
 		var w = 350;
@@ -448,7 +447,7 @@
 		}
 		
 		function getIntro(cont) {
-		  var newLine = cont.replace(/(<br\/>|<br>)/ig, '|n|');
+		  var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '|n|');
 		  var endPos = newLine.search(/(<hr\/>|<hr>)/);
 		  var regex = /(<([^>]+)>)/ig;
 		    
