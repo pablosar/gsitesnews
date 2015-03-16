@@ -6,6 +6,8 @@
   <UserPref name="rss_url" display_name="RSS URL"/>
   <UserPref name="bg" display_name="Background Color"/>
   <UserPref name="time" display_name="Transitions length"/>
+  <UserPref name="width" display_name="Slider Width"/>
+  <UserPref name="height" display_name="Slider Height"/>
    <Content type="html"><![CDATA[<html>
 	<head>	
 		<style>
@@ -276,7 +278,8 @@
 		  var url = prefs.getString("rss_url");
 		  bg = prefs.getString("bg");
 		  t = prefs.getInt("time");
-		  //document.getElementById("extra").innerHTML = prefs.getString("width");
+		  w = prefs.getInt("width");
+		  h = prefs.getInt("height");
 		  var params = {};  		  
 		  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
 		  params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(10);  
