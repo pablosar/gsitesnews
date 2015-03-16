@@ -458,7 +458,7 @@
 		    res = res.replace('|n|', '<br>');
 		  } else {
 		    var res = newLine.replace(regex, ''); 
-		    res = res.replace('|n|', '<br>');
+		    //res = res.replace('|n|', '<br>');
 		  }
 		  
 		  if(res.length > maxChars) {
