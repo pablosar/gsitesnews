@@ -49,6 +49,12 @@
 				position: relative;				
 				overflow: hidden;
 			}
+			#slider:hover {
+				-webkit-animation-play-state: paused;
+				-moz-animation-play-state: paused;
+				-o-animation-play-state: paused;
+				animation-play-state: paused;
+			}
 			#slider_inner, #slider_anim {
 				position: absolute;
 				left: 0px;
@@ -270,7 +276,7 @@
 			<a href="#query_pause" title="Pause" id="pause">II</a>
 			
 			<div id="slider">
-				<div id="slider_anim">
+				<div id="slider_anim">Loading...
 				</div>
 				<div id="slider_inner">
 				</div>
@@ -463,7 +469,7 @@
 		  
 		  if(res.length > maxChars) {
 		  	res = res.substring(0, maxChars);
-		  	res = res.substring(0, res.lastIndexOf(" "));
+		  	res = res.substring(0, res.lastIndexOf(" ")) + '...';
 		  }
 		  
 		  return res;
