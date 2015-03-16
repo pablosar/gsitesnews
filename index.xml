@@ -78,12 +78,6 @@
 				-o-transition: left 0.2s ease-in-out;
 				transition: left 0.2s ease-in-out;				
 			}
-			#slider_anim:hover {
-				-webkit-animation-play-state: paused;
-				-moz-animation-play-state: paused;
-				-o-animation-play-state: paused;
-				animation-play-state: paused;
-			}
 			#mark {
 				position: absolute;				
 				top: 0px;
