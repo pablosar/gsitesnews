@@ -9,7 +9,7 @@
    <Content type="html"><![CDATA[<html>
 	<head>	
 		<style>
-			@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+			@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 			body {
 			  font-family: 'Open Sans';			  
 			  font-weight: 400;
@@ -282,7 +282,7 @@
 		  params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(10);  
 		  params[gadgets.io.RequestParameters.GET_SUMMARIES] = true;   
 		    
-		  gadgets.io.makeRequest(url, makeSlides, params);
+		  //gadgets.io.makeRequest(url, makeSlides, params);
 		};
 			
 		function makeSlides(obj) {
