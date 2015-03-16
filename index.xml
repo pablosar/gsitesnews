@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Fetch Feed Example" 
+    title_url="http://groups.google.com/group/Google-Gadgets-API" 
+    scrolling="true">
+  </ModulePrefs>
+  <UserPref name="rss_url" display_name="RSS URL"/>
+   <Content type="html"><![CDATA[
+   <style>
+     #slider_container {
+       overflow: hidden;
+     }
+     .slide {
+        width: 350px; 
+        display: inline;
+      }     
+      #content_div {
+        width: 1050px;
+        -webkit-animation-name: slider;
+        -webkit-animation-duration: 10s;
+        -webkit-animation-timing-function: ease-in-out;
+        -webkit-animation-iteration-count: infinite;
+        animation-name: slider;
+        animation-duration: 10s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+      }
+      @-webkit-keyframes slider {
+        0% { transform: translateX(0px); }
+        20% { transform: translateX(0px); }
+        30% { transform: translateX(350px); }
+        50% { transform: translateX(350px); }
+        60% { transform: translateX(700px); }
+        80% { transform: translateX(700px); }
+        100% { transform: translateX(1050px); }
+      }
+      @keyframes slider {
+        0% { transform: translateX(0px); }
+        20% { transform: translateX(0px); }
+        30% { transform: translateX(350px); }
+        50% { transform: translateX(350px); }
+        60% { transform: translateX(700px); }
+        80% { transform: translateX(700px); }
+        100% { transform: translateX(1050px); }
+      }
+   </style>
+   <div id="slider_container"><div id="content_div">Loading...</div></div>   
+   <script type="text/javascript">
+    function getHtml() {
+      var prefs = new gadgets.Prefs();
+      var url = prefs.getString("rss_url");
+      var params = {};  
+      //params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+      params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(10);  
+      params[gadgets.io.RequestParameters.GET_SUMMARIES] = true;   
+      //var url = "https://www.google.com";  
+      gadgets.io.makeRequest(url, hola, params);
+    };
+    
+   function hola(obj) {
+     var element = document.getElementById('content_div'); 
+      element.innerHTML = '';
+     // obj.data contains the feed data
+    var feed = obj.data;
+    var html = "";
+
+    // Display the feed title and description
+    //html += "<div><b>" + feed.Title + "</b></div>";
+    //html += "<div>" + feed.Description + "</div><br>";
+      
+    // Access the data for a given entry
+    if (feed.Entry) {
+      for (var i = 0; i < feed.Entry.length; i++) {
+        html += "<div class='slide' dir='ltr'><div class='title'>"
+          + "<a href='" + feed.Entry[i].Link + "' target='_top'>"
+          + feed.Entry[i].Title
+          + "</a> ";
+        html += "</div><div class='content'>" + feed.Entry[i].Summary + "</div>";
+        
+        html += "</div>";
+      }
+     }
+     element.innerHTML = html;
+   }
+    function response(obj) {  
+      //obj.data contains the xml data  
+      var domData = obj.data;
+      //alert('Log = ' + str.substr(0,400));
+      //var html =  str.substr(0,400); 
+      var element = document.getElementById('content_div'); 
+      element.innerHTML = '';
+      
+      // Get a list of the <entry> element nodes in the file
+      var itemList = domData.getElementsByTagName("entry");
+      
+      // Loop through all <entry> nodes
+      for (var i = 0; i < itemList.length ; i++) { 
+        //element.innerHTML += 'New Entry:<br>';
+        // For each <entry> node, get child nodes.
+        var nodeList = itemList.item(i).childNodes;
+        
+        var url = '';
+        var title = '';
+        var content = '';
+        
+        for (var j = 0; j < nodeList.length; j++) {
+          var node = nodeList.item(j);
+          var str = '';
+          if(node.nodeName == 'id') {
+            url = node.firstChild.nodeValue;
+          }
+          if(node.nodeName == 'title') {
+            title = '<h3>' + node.firstChild.nodeValue + '</h3>';
+          }
+          if(node.nodeName == 'content') {
+            content = node.firstChild.nodeValue.toString();
+          }          
+        }
+        
+        element.innerHTML += '<a href="' + url + '" target="_top">' + title + '</a>' + content;
+      }
+    };
+        
+    gadgets.util.registerOnLoadHandler(getHtml);
+    </script>
+  ]]>
+  </Content>
+</Module>
