@@ -49,12 +49,6 @@
 				position: relative;				
 				overflow: hidden;
 			}
-			#slider:hover {
-				-webkit-animation-play-state: paused;
-				-moz-animation-play-state: paused;
-				-o-animation-play-state: paused;
-				animation-play-state: paused;
-			}
 			#slider_inner, #slider_anim {
 				position: absolute;
 				left: 0px;
@@ -83,6 +77,12 @@
 				-moz-transition: left 0.2s ease-in-out;
 				-o-transition: left 0.2s ease-in-out;
 				transition: left 0.2s ease-in-out;				
+			}
+			#slider_anim:hover {
+				-webkit-animation-play-state: paused;
+				-moz-animation-play-state: paused;
+				-o-animation-play-state: paused;
+				animation-play-state: paused;
 			}
 			#mark {
 				position: absolute;				
