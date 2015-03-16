@@ -458,13 +458,15 @@
 		    res = res.replace('|n|', '<br>');
 		  } else {
 		    var res = newLine.replace(regex, ''); 
-		    //res = res.replace('|n|', '<br>');
+		    res = res.replace('|n|', '<br>');
 		  }
 		  
 		  if(res.length > maxChars) {
 		  	res = res.substring(0, maxChars);
 		  	res = res.substring(0, res.lastIndexOf(" ")) + '...';
 		  }
+		  
+		  document.getElementById('extra').innerHTML += cont + '<br>';
 		  
 		  return res;
 		}
