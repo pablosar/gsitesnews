@@ -262,6 +262,7 @@
 				float: left;
 				padding: 2px;
 				border: 1px solid #f0f0f0;
+				margin-right: 10px;
 			}
 		</style>		
 	</head>
@@ -482,6 +483,7 @@
 		  var img1 = imgRegexp.exec(cont);
 		  
 		  if(img1 != '') {
+		  	alert('img1 = ' + img1);
 			  // Use regexp to get the source of the previously retrieved image tag
 			  var srcRegexp = /src=\S+[^>]/;
 			  // Re-make the image tag to assure empty style
