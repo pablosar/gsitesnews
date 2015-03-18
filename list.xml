@@ -5,8 +5,8 @@
   </ModulePrefs>
   <UserPref name="rss_url" display_name="RSS URL"/>
   <UserPref name="bg" display_name="Background Color"/>
-  <UserPref name="itemNum" display_name="The number of items to show"/>
-  <UserPref name="maxChars" display_name="The maximum number of characters to show (0 to show only the title)"/>
+  <UserPref name="item_num" display_name="The number of items to show"/>
+  <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)"/>
    <Content type="html"><![CDATA[
    <html>
 	<head>
@@ -19,6 +19,9 @@
 			}
 			h1, h2, h3, h4, h5, h6 {
 				font-family: "Trebuchet MS", Helvetica, sans-serif;
+			}
+			#slider_inner {
+				padding: 5px;
 			}
 			#slider_inner li {
 				-webkit-border-radius: 5px;
@@ -93,7 +96,7 @@
 			//The url with the rss
 			var url = prefs.getString("rss_url");
 			bg = prefs.getString("bg");
-			itemNum = prefs.getInt("itemNum");		  
+			itemNum = prefs.getInt("item_num");		  
 			maxChars = prefs.getInt("max_chars");
 			
 			//Params to set the request
@@ -126,7 +129,7 @@
 					//Create a slide with the feed contents
 					var slide = '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
 					//Show the image and the intro text only if the number of characters to show is greater than 0
-					if(maxChars <= 0) {
+					if(maxChars > 0) {
 						slide += '<p>' + getImg(feed.Entry[i].summary) + getIntro(feed.Entry[i].Summary) + '</p>';
 					}						
 					slides += '<li><div id="slide' + id + '">' + slide + '</div></li>';					
