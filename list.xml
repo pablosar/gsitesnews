@@ -135,7 +135,7 @@
 					slides += '<li><div id="slide' + id + '">' + slide + '</div></li>';					
 				}
 				
-				var more = '<a href="' + feed.Entry[0].substring(0, feed.Entry[0].lastIndexOf("/")) + ' target="_top" title="More about">More...</a>';
+				var more = '<a href="' + feed.Entry[0].substring(0, feed.Entry[0].lastIndexOf("/")) + '" target="_top" title="More about">More...</a>';
 				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul>'; 				
 			}
 		}
