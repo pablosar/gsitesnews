@@ -10,6 +10,38 @@
    <Content type="html"><![CDATA[
    <html>
 	<head>
+		<style>
+			@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+			body {
+			  font-family: 'Open Sans';
+			  font-weight: 400;
+			  font-size: 10pt;
+			}
+			h1, h2, h3, h4, h5, h6 {
+				font-family: "Trebuchet MS", Helvetica, sans-serif;
+			}
+			#slider_inner li {
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				-o-border-radius: 5px;
+				border-radius: 5px;
+				border: 1px solid #f0f0f0;
+				-webkit-box-shadow: 2px 2px 2px gray;
+				-moz-box-shadow: 2px 2px 2px gray;
+				-o-box-shadow: 2px 2px 2px gray;
+				box-shadow: 2px 2px 2px gray;				
+				position: relative;				
+				overflow: hidden;
+			}
+			.imgPreview {
+				width: 100px;
+				height: 100px;
+				float: left;
+				padding: 2px;
+				border: 1px solid #f0f0f0;
+				margin-right: 10px;
+			}
+		</style>
 	</head>
 	<body>	
 		<div id="slideshow">			
@@ -67,7 +99,7 @@
 					//Create a slide with the feed contents
 					var slide = '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
 					//Show the image and the intro text only if the number of characters to show is greater than 0
-					if(maxChars > 0) {
+					if(maxChars <= 0) {
 						slide += '<p>' + getImg(feed.Entry[i].summary) + getIntro(feed.Entry[i].Summary) + '</p>';
 					}						
 					slides += '<li><div id="slide' + id + '">' + slide + '</div></li>';					
