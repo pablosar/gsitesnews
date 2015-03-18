@@ -11,7 +11,7 @@
    <html>
 	<head>	
 		<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/pablosar/gsitesnews/master/basic.css">		
-		<script src="https://raw.githubusercontent.com/pablosar/gsitesnews/master/helper.js"></script>
+		<script type="text/javascript" src="https://raw.githubusercontent.com/pablosar/gsitesnews/master/helper.js"></script>
 	</head>
 	<body>	
 		<div id="slideshow">			
