@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Google Sites News"     
+    scrolling="true">
+  </ModulePrefs>
+  <UserPref name="rss_url" display_name="RSS URL"/>
+  <UserPref name="bg" display_name="Background Color"/>
+  <UserPref name="itemNum" display_name="The number of items to show"/>
+  <UserPref name="maxChars" display_name="The maximum number of characters to show (0 to show only the title)"/>
+   <Content type="html"><![CDATA[
+   <html>
+	<head>	
+		<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/pablosar/gsitesnews/master/basic.css">		
+		<script src="https://raw.githubusercontent.com/pablosar/gsitesnews/master/helper.js"></script>
+	</head>
+	<body>	
+		<div id="slideshow">			
+			<div id="slider">				
+				<div id="slider_inner">Loading...
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">		
+		//The number of items to show
+		var itemNum = 3;
+		//The number of characters to show
+		var maxChars = 100;
+		//The default background color
+		var bg = '#f9f9f9';
+		
+		
+		function getHtml() {
+			//Get the user preferences
+			var prefs = new gadgets.Prefs();
+			//The url with the rss
+			var url = prefs.getString("rss_url");
+			bg = prefs.getString("bg");
+			itemNum = prefs.getInt("itemNum");		  
+			maxChars = prefs.getInt("max_chars");
+			
+			//Params to set the request
+			var params = {};  		  
+			params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+			params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(itemNum);  
+			params[gadgets.io.RequestParameters.GET_SUMMARIES] = true;   
+				
+			gadgets.io.makeRequest(url, makeSlides, params);
+		};
+			
+		function makeSlides(obj) {
+			// obj.data contains the feed data
+			var feed = obj.data;
+			
+			//If the data is not empty
+			if (feed.Entry) {
+				//Create a CSS object with the background color
+				var css = 'body {background-color: ' + bg + ';}\n';				
+				appendCSS(css);
+				
+				//Variable to put the slides into
+				var slides = '';		
+				
+				//Loop through the feed entries
+				for(var i=0; i < feed.Entry.length; i++){
+					//The id of the slide
+					var id = (i+1).toString();
+					
+					//Create a slide with the feed contents
+					var slide = '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
+					//Show the image and the intro text only if the number of characters to show is greater than 0
+					if(maxChars > 0) {
+						slide += '<p>' + getImg(feed.Entry[i].summary) + getIntro(feed.Entry[i].Summary) + '</p>';
+					}						
+					slides += '<li><div id="slide' + id + '">' + slide + '</div></li>';					
+				}
+							
+				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul>'; 				
+			}
+		}
+			
+		//Load the html	
+		gadgets.util.registerOnLoadHandler(getHtml);
+	</script>
+	</html>
+	]]>
+  </Content>
+</Module>
