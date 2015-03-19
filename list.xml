@@ -72,6 +72,9 @@
 				border: 1px solid #f0f0f0;
 				margin-right: 10px;
 			}
+			#more {
+				float: right;
+			}
 		</style>
 	</head>
 	<body>	
