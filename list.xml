@@ -80,7 +80,7 @@
 	<body>	
 		<div id="slideshow">			
 			<div id="slider">				
-				<div id="slider_inner">Loading.......
+				<div id="slider_inner">Loading...
 				</div>
 			</div>
 		</div>
@@ -107,9 +107,9 @@
 			itemNum = prefs.getInt("item_num");		  
 			maxChars = prefs.getInt("max_chars");
 			readMore = prefs.getString("read_more");
-			headTitle = gadgets.views.getParams()
+			//headTitle = gadgets.views.getParams();
 			
-			alert(stringify(headTitle));
+			alert(stringify(prefs));
 			
 			//Params to set the request
 			var params = {};  		  
