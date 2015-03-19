@@ -3,10 +3,11 @@
   <ModulePrefs title="Google Sites News"     
     scrolling="true">
   </ModulePrefs>
-  <UserPref name="rss_url" display_name="RSS URL"/>
-  <UserPref name="bg" display_name="Background Color"/>
-  <UserPref name="item_num" display_name="The number of items to show"/>
-  <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)"/>
+  <UserPref name="rss_url" display_name="RSS URL" required="true"/>
+  <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
+  <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="2"/>
+  <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)" required="true" default_value="100"/>
+  <UserPref name="read_more" display_name="Text for the read more button" required="true" default_value="Read More..."/>
    <Content type="html"><![CDATA[
    <html>
 	<head>
@@ -88,6 +89,8 @@
 		var maxChars = 100;
 		//The default background color
 		var bg = '#f9f9f9';
+		//The read more button text
+		var readMore = 'Read More...';
 		
 		
 		function getHtml() {
@@ -98,6 +101,7 @@
 			bg = prefs.getString("bg");
 			itemNum = prefs.getInt("item_num");		  
 			maxChars = prefs.getInt("max_chars");
+			readMore = prefs.getString("read_more");
 			
 			//Params to set the request
 			var params = {};  		  
@@ -136,7 +140,7 @@
 				}
 				var parentLink = feed.Entry[0].Link;
 				parentLink = parentLink.substring(0, parentLink.lastIndexOf("/"));
-				var more = '<a href="' + parentLink + '" target="_top" title="More about">More...</a>';
+				var more = '<a href="' + parentLink + '" target="_top" title="More about">' + readMore + '</a>';
 				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul><div id="more">' + more + '</div>'; 				
 			}
 		}
