@@ -4,6 +4,7 @@
     scrolling="true">
   </ModulePrefs>
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
+  <UserPref name="inner_title" display_name="Title" default_value=""/>
   <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="2"/>
   <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)" required="true" default_value="100"/>
@@ -95,7 +96,7 @@
 		//The read more button text
 		var readMore = 'Read More...';
 		//The title of the window
-		var headTitle = '';
+		var innerTitle = '';
 		
 		
 		function getHtml() {
@@ -107,9 +108,9 @@
 			itemNum = prefs.getInt("item_num");		  
 			maxChars = prefs.getInt("max_chars");
 			readMore = prefs.getString("read_more");
-			//headTitle = gadgets.views.getParams();
+			innerTitle = prefs.getString("inner_title");
 			
-			alert(gadgets.json.stringify(prefs));
+			
 			
 			//Params to set the request
 			var params = {};  		  
@@ -132,6 +133,10 @@
 				
 				//Variable to put the slides into
 				var slides = '';		
+				
+				if(inner_title != '') {
+					slides += '<h1>' + inner_title + '</h1><hr>';
+				}
 				
 				//Loop through the feed entries
 				for(var i=0; i < feed.Entry.length; i++){
