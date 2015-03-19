@@ -107,7 +107,7 @@
 			itemNum = prefs.getInt("item_num");		  
 			maxChars = prefs.getInt("max_chars");
 			readMore = prefs.getString("read_more");
-			headTitle = gadget.views.getParams()
+			headTitle = gadgets.views.getParams()
 			
 			alert(stringify(headTitle));
 			
