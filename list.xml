@@ -13,7 +13,7 @@
 	<head>
 		<style>
 			@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-			body {
+			#slideshow {
 			  font-family: 'Open Sans';
 			  font-weight: 400;
 			  font-size: 10pt;
