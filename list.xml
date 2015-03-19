@@ -4,7 +4,6 @@
     scrolling="true">
   </ModulePrefs>
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
-  <UserPref name="inner_title" display_name="Title" default_value=""/>
   <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="2"/>
   <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)" required="true" default_value="100"/>
@@ -21,7 +20,6 @@
 			}
 			h1, h2, h3, h4, h5, h6 {
 				font-family: "Trebuchet MS", Helvetica, sans-serif;
-				text-transform: uppercase;
 				color: #005596;
 			}
 			#slider_inner {
@@ -75,10 +73,6 @@
 				border: 1px solid #f0f0f0;
 				margin-right: 10px;
 			}
-			.title {
-				border-bottom: 1px solid rgb(202,202,202);
-				margin-bottom: 3px;
-			}
 			#more {
 				float: right;
 			}
@@ -101,9 +95,6 @@
 		var bg = '#f9f9f9';
 		//The read more button text
 		var readMore = 'Read More...';
-		//The title of the window
-		var innerTitle = '';
-		
 		
 		function getHtml() {
 			//Get the user preferences
@@ -114,9 +105,6 @@
 			itemNum = prefs.getInt("item_num");		  
 			maxChars = prefs.getInt("max_chars");
 			readMore = prefs.getString("read_more");
-			innerTitle = prefs.getString("inner_title");
-			
-			
 			
 			//Params to set the request
 			var params = {};  		  
@@ -139,10 +127,6 @@
 				
 				//Variable to put the slides into
 				var slides = '';		
-				
-				if(innerTitle != '') {
-					slides += '<div class="title"><h4>' + innerTitle + '</h4></div>';
-				}
 				
 				//Loop through the feed entries
 				for(var i=0; i < feed.Entry.length; i++){
