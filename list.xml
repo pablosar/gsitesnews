@@ -21,6 +21,8 @@
 			}
 			h1, h2, h3, h4, h5, h6 {
 				font-family: "Trebuchet MS", Helvetica, sans-serif;
+				text-transform: capitalize;
+				color: #005596;
 			}
 			#slider_inner {
 				padding: 0;
@@ -72,6 +74,10 @@
 				padding: 2px;
 				border: 1px solid #f0f0f0;
 				margin-right: 10px;
+			}
+			.title {
+				border-bottom: 1px solid rgb(202,202,202);
+				margin-bottom: 3px;
 			}
 			#more {
 				float: right;
@@ -135,7 +141,7 @@
 				var slides = '';		
 				
 				if(innerTitle != '') {
-					slides += '<h1>' + innerTitle + '</h1><hr>';
+					slides += '<div class="title"><h4>' + innerTitle + '</h4><div>';
 				}
 				
 				//Loop through the feed entries
