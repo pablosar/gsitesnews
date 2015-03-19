@@ -109,7 +109,7 @@
 			readMore = prefs.getString("read_more");
 			//headTitle = gadgets.views.getParams();
 			
-			alert(stringify(prefs));
+			alert(gadgets.json.stringify(prefs));
 			
 			//Params to set the request
 			var params = {};  		  
