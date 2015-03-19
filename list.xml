@@ -21,7 +21,7 @@
 			}
 			h1, h2, h3, h4, h5, h6 {
 				font-family: "Trebuchet MS", Helvetica, sans-serif;
-				text-transform: capitalize;
+				text-transform: uppercase;
 				color: #005596;
 			}
 			#slider_inner {
@@ -141,7 +141,7 @@
 				var slides = '';		
 				
 				if(innerTitle != '') {
-					slides += '<div class="title"><h4>' + innerTitle + '</h4><div>';
+					slides += '<div class="title"><h4>' + innerTitle + '</h4></div>';
 				}
 				
 				//Loop through the feed entries
