@@ -134,8 +134,8 @@
 				//Variable to put the slides into
 				var slides = '';		
 				
-				if(inner_title != '') {
-					slides += '<h1>' + inner_title + '</h1><hr>';
+				if(innerTitle != '') {
+					slides += '<h1>' + innerTitle + '</h1><hr>';
 				}
 				
 				//Loop through the feed entries
