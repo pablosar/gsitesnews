@@ -91,6 +91,8 @@
 		var bg = '#f9f9f9';
 		//The read more button text
 		var readMore = 'Read More...';
+		//The title of the window
+		var headTitle = '';
 		
 		
 		function getHtml() {
@@ -102,6 +104,9 @@
 			itemNum = prefs.getInt("item_num");		  
 			maxChars = prefs.getInt("max_chars");
 			readMore = prefs.getString("read_more");
+			headTitle = gadget.views.getParams()
+			
+			alert(stringify(headTitle));
 			
 			//Params to set the request
 			var params = {};  		  
