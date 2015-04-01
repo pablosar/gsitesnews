@@ -67,15 +67,15 @@
 				height: 100px;
 			}
 			.imgPreview {
-			position: absolute;
-			left: 50%;
-			top: 50%;			
-			width: 100%;
-			height: auto;
-			-webkit-transform: translate(-50%,-50%);
-			-ms-transform: translate(-50%,-50%);
-			-o-transform: translate(-50%,-50%);
-			transform: translate(-50%,-50%);
+				position: absolute;
+				left: 50%;
+				top: 50%;			
+				width: 100%;
+				height: auto;
+				-webkit-transform: translate(-50%,-50%);
+				-ms-transform: translate(-50%,-50%);
+				-o-transform: translate(-50%,-50%);
+				transform: translate(-50%,-50%);
 			}
 			.thumbnail {
 				position: relative;
@@ -98,7 +98,7 @@
 	<body>	
 		<div id="slideshow">			
 			<div id="slider">				
-				<div id="slider_inner">Loading...
+				<div id="slider_inner">Loading.....
 				</div>
 			</div>
 		</div>
