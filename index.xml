@@ -9,6 +9,7 @@
   <UserPref name="width" display_name="Slider Width" required="true" default_value="350"/>
   <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
   <UserPref name="max_chars" display_name="Maximum Characters to Show" required="true" default_value="100"/>
+  <UserPref name="img_size" display_name="Picture Preview Size" required="true" default_value="100"/>
    <Content type="html"><![CDATA[<html>
 	<head>	
 		<style>
@@ -255,11 +256,23 @@
 			display: none;
 		}
 		.imgPreview {
-			width: 100px;
-			height: 100px;
+			position: absolute;
+			left: 50%;
+			top: 50%;			
+			width: 100%;
+			height: auto;
+			-webkit-transform: translate(-50%,-50%);
+			-ms-transform: translate(-50%,-50%);
+			-o-transform: translate(-50%,-50%);
+			transform: translate(-50%,-50%);
+		}
+		.thumbnail {
+			position: relative;
+			overflow: hidden;
 			float: left;
 			padding: 2px;
-			border: 1px solid #f0f0f0;
+			border: 1px solid #cacaca;
+			border-bottom: 2px solid #cacaca;
 			margin-right: 10px;
 		}
 		</style>
@@ -294,6 +307,7 @@
 		var t = 4;
 		var bg = '#f9f9f9';
 		var maxChars = 100;
+		var imgSize = 100;
 		
 		function getHtml() {
 		  var prefs = new gadgets.Prefs();
@@ -303,6 +317,7 @@
 		  w = prefs.getInt("width");
 		  h = prefs.getInt("height");
 		  maxChars = prefs.getInt("max_chars");
+		  imgSize = prefs.getInt("img_size");
 		  var params = {};  		  
 		  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
 		  params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(10);  
@@ -485,7 +500,7 @@
 			  // Use regexp to get the source of the previously retrieved image tag
 			  var srcRegexp = /src=\S+[^>]/;
 			  // Re-make the image tag to assure empty style
-			  var imgPrev = '<img ' + srcRegexp.exec(img1) + ' class="imgPreview" />';
+			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' class="imgPreview" /></div>';
 			  
 			  // Return the image
 			  return imgPrev;
