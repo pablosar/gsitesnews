@@ -123,7 +123,7 @@
 			itemNum = prefs.getInt("item_num");		  
 			maxChars = prefs.getInt("max_chars");
 			readMore = prefs.getString("read_more");
-			picSize = prefs.getInt("img_size");
+			imgSize = prefs.getInt("img_size");
 			itemHeight = prefs.getInt("item_height");
 			
 			//Params to set the request
@@ -155,10 +155,10 @@
 					var id = (i+1).toString();
 					
 					//Create a slide with the feed contents
-					var slide = '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
+					var slide = getImg(feed.Entry[i].Summary) + '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
 					//Show the image and the intro text only if the number of characters to show is greater than 0
 					if(maxChars > 0) {
-						slide += '<p>' + getImg(feed.Entry[i].Summary) + getIntro(feed.Entry[i].Summary) + '</p>';
+						slide += '<p>' + getIntro(feed.Entry[i].Summary) + '</p>';
 					}						
 					slides += '<li><div id="slide' + id + '">' + slide + '</div></li>';					
 				}
