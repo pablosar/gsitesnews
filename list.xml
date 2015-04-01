@@ -178,10 +178,10 @@
 		  if(endPos > 0) {    
 			var intro = newLine.slice(0, endPos);    
 			var res = intro.replace(regex, ''); 
-			res = res.replace(/|n|/g, '<br>');
+			res = res.replace(/[|n|]+/g, '<br>');
 		  } else {
 			var res = newLine.replace(regex, ''); 
-			res = res.replace(/|n|/g, '<br>');
+			res = res.replace(/[|n|]+/g, '<br>');
 		  }
 		  
 		  if(res.length > maxChars) {
