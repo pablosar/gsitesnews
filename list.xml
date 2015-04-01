@@ -6,6 +6,7 @@
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
   <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="2"/>
+  <UserPref name="item_height" display_name="Item height" required="true" default_value="100"/>
   <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)" required="true" default_value="100"/>
   <UserPref name="img_size" display_name="Thumbnail picture size" required="true" default_value="100"/>
   <UserPref name="read_more" display_name="Text for the read more button" required="true" default_value="Read More..."/>
@@ -62,10 +63,6 @@
 				position: relative;				
 				overflow: hidden;
 			}
-			#slider ul li div {
-				padding: 10px;
-				height: 100px;
-			}
 			.imgPreview {
 				position: absolute;
 				left: 50%;
@@ -114,6 +111,8 @@
 		var readMore = 'Read More...';
 		//The picture size
 		var imgSize = 100;
+		//The slide height
+		var itemHeight = 100;
 		
 		function getHtml() {
 			//Get the user preferences
@@ -125,6 +124,7 @@
 			maxChars = prefs.getInt("max_chars");
 			readMore = prefs.getString("read_more");
 			picSize = prefs.getInt("img_size");
+			itemHeight = prefs.getInt("item_height");
 			
 			//Params to set the request
 			var params = {};  		  
@@ -142,7 +142,8 @@
 			//If the data is not empty
 			if (feed.Entry) {
 				//Create a CSS object with the background color
-				var css = 'body {background-color: ' + bg + ';}\n';				
+				var css = 'body {background-color: ' + bg + ';}\n';
+				css += '#slider ul li div {padding: 10px; height: '+itemHeight+'px;}\n';
 				appendCSS(css);
 				
 				//Variable to put the slides into
