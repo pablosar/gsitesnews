@@ -219,8 +219,8 @@
 			  // Use regexp to get the source of the previously retrieved image tag
 			  var srcRegexp = /src=\S+[^>]/;
 			  // Re-make the image tag to assure empty style
-			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' class="imgPreview" /></div>';
-			  
+			  //var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' class="imgPreview" /></div>';
+			  var imgPrev = '';
 			  // Return the image
 			  return imgPrev;
 		  } else {
