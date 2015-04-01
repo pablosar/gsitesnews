@@ -143,7 +143,7 @@
 			if (feed.Entry) {
 				//Create a CSS object with the background color
 				var css = 'body {background-color: ' + bg + ';}\n';
-				css += '#slider ul li div {padding: 10px; height: '+itemHeight+'px;}\n';
+				css += '#slider ul li div {display:table-cell;valign:middle;padding: 10px; height: '+itemHeight+'px;}\n';
 				appendCSS(css);
 				
 				//Variable to put the slides into
