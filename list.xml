@@ -7,6 +7,7 @@
   <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="2"/>
   <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)" required="true" default_value="100"/>
+  <UserPref name="pic_size" display_name="Thumbnail picture size" required="true" default_value="100"/>
   <UserPref name="read_more" display_name="Text for the read more button" required="true" default_value="Read More..."/>
    <Content type="html"><![CDATA[
    <html>
@@ -66,11 +67,23 @@
 				height: 100px;
 			}
 			.imgPreview {
-				width: 100px;
-				height: 100px;
+			position: absolute;
+			left: 50%;
+			top: 50%;			
+			width: 100%;
+			height: auto;
+			-webkit-transform: translate(-50%,-50%);
+			-ms-transform: translate(-50%,-50%);
+			-o-transform: translate(-50%,-50%);
+			transform: translate(-50%,-50%);
+			}
+			.thumbnail {
+				position: relative;
+				overflow: hidden;
 				float: left;
 				padding: 2px;
-				border: 1px solid #f0f0f0;
+				border: 1px solid #cacaca;
+				border-bottom: 2px solid #cacaca;
 				margin-right: 10px;
 			}
 			#more {
@@ -99,6 +112,8 @@
 		var bg = '#f9f9f9';
 		//The read more button text
 		var readMore = 'Read More...';
+		//The picture size
+		var picSize = 100;
 		
 		function getHtml() {
 			//Get the user preferences
@@ -109,6 +124,7 @@
 			itemNum = prefs.getInt("item_num");		  
 			maxChars = prefs.getInt("max_chars");
 			readMore = prefs.getString("read_more");
+			picSize = prefs.getInt("pic_size");
 			
 			//Params to set the request
 			var params = {};  		  
@@ -203,7 +219,7 @@
 			  // Use regexp to get the source of the previously retrieved image tag
 			  var srcRegexp = /src=\S+[^>]/;
 			  // Re-make the image tag to assure empty style
-			  var imgPrev = '<img ' + srcRegexp.exec(img1) + ' class="imgPreview" />';
+			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' class="imgPreview" /></div>';
 			  
 			  // Return the image
 			  return imgPrev;
