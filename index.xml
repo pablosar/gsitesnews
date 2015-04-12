@@ -350,7 +350,7 @@
 				var markTrans = (Math.round(perKf * 0.2 / 3) * 100) / 100;
 				
 				for(var i=0; i < feed.Entry.length; i++){
-					var milliseconds = (feed.Entry[i].Date) * 1000; 
+					var milliseconds = (feed.Entry[i].Date); // * 1000; 
 				          var date = new Date(milliseconds); 
 				          var dateStr = date.toLocaleDateString();
 				          dateStr += " ";
