@@ -243,13 +243,14 @@
 			  // Return the image
 			  return imgPrev;
 			} else {
-				var res = getYoutube(cont);
+				/*var res = getYoutube(cont);
 				
 				if(res != -1) {
 					return res;
 				} else {
 					return '';
-				}
+				}*/
+				return '';
 			}
 		}
 		
