@@ -258,7 +258,7 @@
 		  // Get the preview of the media from a webpage (video thumbnail)		  
 		  // Get the youtube video id
 		  var regex = /\/\/www.youtube.com\/embed\/([\S^\?]+)\?/i;
-		  //var res = regex.exec(cont);		  
+		  var res = regex.exec(cont);		  
 		  
 		  /*if(res != null) {
 			var tag = '<img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" />';			  
