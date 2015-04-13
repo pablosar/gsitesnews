@@ -26,6 +26,9 @@
 		h1, h2, h3, h4, h5, h6 {
 			font-family: "Trebuchet MS", Helvetica, sans-serif;
 		}
+		#slideshow p {
+			font-family: 'Open Sans';
+		}
 		#slider {
 			-webkit-border-radius: 5px;
 			-moz-border-radius: 5px;
