@@ -99,7 +99,7 @@
 	<body>	
 		<div id="slideshow">			
 			<div id="slider">				
-				<div id="slider_inner">Loading...
+				<div id="slider_inner">Loading.....
 				</div>
 			</div>
 		</div>
@@ -176,7 +176,7 @@
 					var slide = getImg(feed.Entry[i].Summary) + '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
 					//Show the image and the intro text only if the number of characters to show is greater than 0
 					if(maxChars > 0) {
-						slide += '<p>a= ' + getIntro(feed.Entry[i].Summary) + '</p>';
+						slide += '<p>' + getIntro(feed.Entry[i].Summary) + '</p>';
 					}						
 					slides += '<li><div id="slide' + id + '">' + slide + '</div></li>';					
 				}
