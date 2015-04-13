@@ -99,7 +99,7 @@
 	<body>	
 		<div id="slideshow">			
 			<div id="slider">				
-				<div id="slider_inner">Loading.....
+				<div id="slider_inner">Loading...
 				</div>
 			</div>
 		</div>
@@ -243,13 +243,13 @@
 			  // Return the image
 			  return imgPrev;
 			} else {
-				/*var res = getYoutube(cont);
+				var res = getYoutube(cont);
 				
 				if(res != -1) {
 					return res;
 				} else {
 					return '';
-				}*/
+				}
 				return '';
 			}
 		}
@@ -258,17 +258,17 @@
 		  // Get the preview of the media from a webpage (video thumbnail)		  
 		  // Get the youtube video id
 		  var regex = /\/\/www.youtube.com\/embed\/([\S^\?]+)\?/i;
-		  var res = regex.exec(cont);		  
+		  //var res = regex.exec(cont);		  
 		  
-		  if(res != null) {
+		  /*if(res != null) {
 			var tag = '<img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" />';			  
 			var vid = res.replace('embed/', '');
 			vid = vid.substring(0, vid.length-1);
 			
 			return tag.replace('###', vid); 
-		  } else {
+		  } else {*/
 			return -1;
-		  }		  
+		  //}		  
 		}
 		
 		//Load the html	
