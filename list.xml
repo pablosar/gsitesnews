@@ -99,7 +99,7 @@
 	<body>	
 		<div id="slideshow">			
 			<div id="slider">				
-				<div id="slider_inner">Loading...
+				<div id="slider_inner">Loading....
 				</div>
 			</div>
 		</div>
@@ -260,15 +260,16 @@
 		  var regex = /\/\/www.youtube.com\/embed\/([\S^\?]+)\?/i;
 		  var res = regex.exec(cont);		  
 		  
-		  /*if(res != null) {
-			var tag = '<img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" />';			  
+		  if(res != null) {
+			/*var tag = '<img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" />';			  
 			var vid = res.replace('embed/', '');
 			vid = vid.substring(0, vid.length-1);
 			
-			return tag.replace('###', vid); 
-		  } else {*/
+			return tag.replace('###', vid); */
+			return res;
+		  } else {
 			return -1;
-		  //}		  
+		  }		  
 		}
 		
 		//Load the html	
