@@ -10,6 +10,7 @@
   <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
   <UserPref name="max_chars" display_name="Maximum Characters to Show" required="true" default_value="100"/>
   <UserPref name="img_size" display_name="Picture Preview Size" required="true" default_value="100"/>
+  <UserPref name="no_cache" display_name="Cache Size (in seconds)" required="true" default_value="60"/>
    <Content type="html"><![CDATA[<html>
 	<head>	
 		<style>
@@ -308,6 +309,7 @@
 		var bg = '#f9f9f9';
 		var maxChars = 100;
 		var imgSize = 100;
+		var nocache = 60;
 		
 		function getHtml() {
 		  var prefs = new gadgets.Prefs();
@@ -318,13 +320,28 @@
 		  h = prefs.getInt("height");
 		  maxChars = prefs.getInt("max_chars");
 		  imgSize = prefs.getInt("img_size");
+		  nocache = prefs.getInt("no_cache");
+		  
 		  var params = {};  		  
 		  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
 		  params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(10);  
 		  params[gadgets.io.RequestParameters.GET_SUMMARIES] = true;   
 		    
-		  gadgets.io.makeRequest(url, makeSlides, params);
+		  makeCachedRequest(url, makeSlides, params, nocache);
 		};
+		
+		function makeCachedRequest(url, callback, params, refreshInterval) {
+		  var ts = new Date().getTime();
+		  var sep = "?";
+		  if (refreshInterval && refreshInterval > 0) {
+		    ts = Math.floor(ts / (refreshInterval * 1000));
+		  }
+		  if (url.indexOf("?") > -1) {
+		    sep = "&";
+		  }
+		  url = [ url, sep, "nocache=", ts ].join("");
+		  gadgets.io.makeRequest(url, callback, params);
+		}
 			
 		function makeSlides(obj) {
 			// obj.data contains the feed data
