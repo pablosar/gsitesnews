@@ -25,6 +25,9 @@
 				font-family: "Trebuchet MS", Helvetica, sans-serif;
 				color: #005596;
 			}
+			#slideshow p {
+				font-family: 'Open Sans';
+			}
 			#slider_inner {
 				padding: 0;
 			}
