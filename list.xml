@@ -262,10 +262,10 @@
 		  
 		  if(res != null) {
 			var tag = '<img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" />';			  
-			var vid = res.replace('//www.youtube.com/embed/', '');
-			//vid = vid.substring(0, vid.length-1);
+			/*var vid = res.replace('//www.youtube.com/embed/', '');
+			vid = vid.substring(0, vid.length-1);
 			
-			//return tag.replace('###', vid); 
+			return tag.replace('###', vid); */
 			return res;
 		  } else {
 			return -1;
