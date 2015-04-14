@@ -267,7 +267,6 @@
 			//Extract the id of the video
 			//var vid = res.replace('www.youtube.com/embed/', '');
 			var vid = res[1].toString();
-			vid = vid.substring(0, vid.length-1);
 			
 			//Replace the video id in the tag template
 			return tag.replace('###', vid);
