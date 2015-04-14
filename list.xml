@@ -237,8 +237,9 @@
 		  if(img1 != null) {
 			  // Use regexp to get the source of the previously retrieved image tag
 			  var srcRegexp = /src=\S+[^>]/;
+			  var res = srcRegexp.exec(img1);
 			  // Re-make the image tag to assure empty style
-			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' class="imgPreview" /></div>';
+			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + res.toString() + ' class="imgPreview" /></div>';
 			  
 			  // Return the image
 			  return imgPrev;
@@ -261,12 +262,16 @@
 		  var res = regex.exec(cont);		  
 		  
 		  if(res != null) {
-			var tag = '<img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" />';			  
-			/*var vid = res.replace('//www.youtube.com/embed/', '');
+		  	//Convert the results to string
+		  	res = res.toString();
+			var tag = '<img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" />';
+			//Extract the id of the video
+			var vid = res.replace('//www.youtube.com/embed/', '');
 			vid = vid.substring(0, vid.length-1);
 			
-			return tag.replace('###', vid); */
-			return typeof res;
+			//Replace the video id in the tag template
+			return tag.replace('###', vid);
+			//return typeof res;
 		  } else {
 			return -1;
 		  }		  
