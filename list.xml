@@ -45,7 +45,6 @@
 			#slider ul {
 				margin: 0;
 				padding: 0;
-				width: 100%;
 			}
 			#slider ul li {
 				display: block;				
