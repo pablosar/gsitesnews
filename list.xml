@@ -44,7 +44,8 @@
 			}
 			#slider ul {
 				margin: 0;
-				padding: 0;					
+				padding: 0;
+				width: 100%;
 			}
 			#slider ul li {
 				display: block;				
@@ -55,18 +56,12 @@
 				padding: 0;				
 				list-style: none;
 				background-color: #ffffff;
-				/*-webkit-border-radius: 5px;
-				-moz-border-radius: 5px;
-				-o-border-radius: 5px;
-				border-radius: 5px;*/
-				border: 1px solid rgb(202,202,202);
-				border-bottom: 2px solid rgb(202,202,202);
-				/*-webkit-box-shadow: 2px 2px 2px gray;
-				-moz-box-shadow: 2px 2px 2px gray;
-				-o-box-shadow: 2px 2px 2px gray;
-				box-shadow: 2px 2px 2px gray;	*/			
+				width: 100%;			
 				position: relative;				
 				overflow: hidden;
+			}
+			slider ul li div {
+				width: 100%;
 			}
 			.imgPreview {
 				position: absolute;
