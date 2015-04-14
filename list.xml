@@ -60,9 +60,6 @@
 				position: relative;				
 				overflow: hidden;
 			}
-			slider ul li div {
-				width: 100%;
-			}
 			.imgPreview {
 				position: absolute;
 				left: 50%;
