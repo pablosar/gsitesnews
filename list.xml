@@ -9,7 +9,8 @@
   <UserPref name="item_height" display_name="Item height" required="true" default_value="100"/>
   <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)" required="true" default_value="100"/>
   <UserPref name="img_size" display_name="Thumbnail picture size" required="true" default_value="100"/>
-  <UserPref name="read_more" display_name="Text for the read more button" required="true" default_value="Read More..."/>
+  <UserPref name="show_more" display_name="Show read more button" datatype="bool" default_value="true"/>
+  <UserPref name="read_more" display_name="Text for the read more button" default_value="Read More..."/>
   <UserPref name="no_cache" display_name="Cache Size (in seconds)" required="true" default_value="60"/>
    <Content type="html"><![CDATA[
    <html>
@@ -111,6 +112,8 @@
 		var maxChars = 100;
 		//The default background color
 		var bg = '#f9f9f9';
+		//Boolean show/dont show read more button
+		var showMore = true;
 		//The read more button text
 		var readMore = 'Read More...';
 		//The picture size
@@ -128,6 +131,7 @@
 			bg = prefs.getString("bg");
 			itemNum = prefs.getInt("item_num");		  
 			maxChars = prefs.getInt("max_chars");
+			showMore = prefs.getBool("show_more");
 			readMore = prefs.getString("read_more");
 			imgSize = prefs.getInt("img_size");
 			itemHeight = prefs.getInt("item_height");
@@ -182,8 +186,15 @@
 				}
 				var parentLink = feed.Entry[0].Link;
 				parentLink = parentLink.substring(0, parentLink.lastIndexOf("/"));
-				var more = '<a href="' + parentLink + '" target="_top" title="More about">' + readMore + '</a>';
-				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul><div id="more">' + more + '</div>'; 				
+				
+				if(showMore) {
+					var more = '<div id="more"><a href="' + parentLink + '" target="_top" title="More about">' + readMore + '</a></div>';
+				} else {
+					var more = '';
+				}
+				
+				
+				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul>' + more; 				
 			}
 		}
 		
