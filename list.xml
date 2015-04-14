@@ -58,6 +58,8 @@
 				width: 100%;			
 				position: relative;				
 				overflow: hidden;
+				border: 1px solid rgb(202,202,202);
+				border-bottom: 2px solid rgb(202,202,202);
 			}
 			.imgPreview {
 				position: absolute;
