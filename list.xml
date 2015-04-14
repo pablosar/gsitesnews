@@ -263,7 +263,7 @@
 		  
 		  if(res != null && res.length > 1) {
 		  	//Convert the results to string
-			var tag = '<img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" />';
+			var tag = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" /></div>';
 			//Extract the id of the video
 			//var vid = res.replace('www.youtube.com/embed/', '');
 			var vid = res[1].toString();
