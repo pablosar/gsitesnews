@@ -157,7 +157,7 @@
 			if (feed.Entry) {
 				//Create a CSS object with the background color
 				var css = 'body {background-color: ' + bg + ';}\n';
-				css += '#slider ul li div {width:100%;padding: 10px; height: '+itemHeight+'px;}\n';
+				css += '#slider ul li div {padding: 10px; height: '+itemHeight+'px;}\n';
 				appendCSS(css);
 				
 				//Variable to put the slides into
@@ -242,7 +242,7 @@
 			  var srcRegexp = /src=\S+[^>]/;
 			  var res = srcRegexp.exec(img1);
 			  // Re-make the image tag to assure empty style
-			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + res.toString() + ' class="imgPreview" /></div>';
+			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img ' + res.toString() + ' class="imgPreview" /></div>';
 			  
 			  // Return the image
 			  return imgPrev;
@@ -266,7 +266,7 @@
 		  
 		  if(res != null && res.length > 1) {
 		  	//Convert the results to string
-			var tag = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" /></div>';
+			var tag = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" /></div>';
 			//Extract the id of the video
 			//var vid = res.replace('www.youtube.com/embed/', '');
 			var vid = res[1].toString();
