@@ -266,7 +266,7 @@
 			//vid = vid.substring(0, vid.length-1);
 			
 			//return tag.replace('###', vid); 
-			return temp;
+			return vid;
 		  } else {
 			return -1;
 		  }		  
