@@ -489,7 +489,7 @@
 		
 		function getIntro(cont) {
 		  var nRegex = /<\/div>[\n\r]*<div>/g;
-		  var newLine = cont.replace(nRegex, '|. ');
+		  var newLine = cont.replace(nRegex, '. ');
 		  var endPos = newLine.search(/(<hr\/>|<hr \/>|<hr>)/);
 		  var regex = /(<([^>]+)>)/ig;
 			
