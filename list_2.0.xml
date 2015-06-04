@@ -211,7 +211,7 @@
 		  //var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '');
 		  var newLine = cont.toString();
 		  //var endPos = newLine.search(/(<hr\/>|<hr>)/);
-		  var endPos = newLine.indexOf("<hr>");
+		  var endPos = newLine.search(/<hr>/);
 		  var regex = /(<([^>]+)>)/ig;
 			
 		  if(endPos > 0) {    
