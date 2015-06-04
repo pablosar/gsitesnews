@@ -209,7 +209,7 @@
 		function getIntro(cont) {
 		  //var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '|n|');
 		  //var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '');
-		  var nRegex = /\n/g;
+		  var nRegex = /(\n|\r|\n\r|\r\n|\u2028)/g;
 		  var newLine = nRegex.exec(cont);
 		  var endPos = cont.search(/(<hr\/>|<hr \/>|<hr>)/);
 		  //var hrRegex = /<hr>/;
@@ -230,6 +230,7 @@
 			res = res.substring(0, res.lastIndexOf(" ")) + '...';
 		  }
 		  
+		  if(newLine != null) {return newLine.length} else {return 0};
 		  return newLine.length;
 		}
 		function getImg(cont) {
