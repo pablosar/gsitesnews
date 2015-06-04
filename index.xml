@@ -501,7 +501,7 @@
 		  }
 		  
 		res = res.replace(/^[\.\s]+/, '');
-		res = res.replace(/(\.\s\.\s)+/, '');
+		res = res.replace(/(\.\s\.\s)+/g, '');
 		  
 		  if(res.length > maxChars) {
 			res = res.substring(0, maxChars);
