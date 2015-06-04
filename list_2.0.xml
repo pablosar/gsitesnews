@@ -211,8 +211,8 @@
 		  //var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '');
 		  var newLine = cont.toString();
 		  //var endPos = newLine.search(/(<hr\/>|<hr>)/);
-		  var endPos = newLine.search(/<hr>/);
-		  var regex = /(<([^>]+)>)/ig;
+		  var endPos = newLine.exec(/<hr>/);
+		  /*var regex = /(<([^>]+)>)/ig;
 			
 		  if(endPos > 0) {    
 			var intro = newLine.substring(0, endPos);    
@@ -226,9 +226,9 @@
 		  if(res.length > maxChars) {
 			res = res.substring(0, maxChars);
 			res = res.substring(0, res.lastIndexOf(" ")) + '...';
-		  }
+		  }*/
 		  
-		  return 'Pos1: ' + endPos.toString();
+		  return 'Pos2: ' + endPos.toString() + ' - ' + endPos.index;
 		}
 		function getImg(cont) {
 		  // Retrieve the first image source from the content of the page
