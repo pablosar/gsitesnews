@@ -219,7 +219,7 @@
 			var res = newLine.replace(regex, ''); 
 		  }
 		  
-		  res.replace(/^[\.\s]+/, '');
+		res = res.replace(/^[\.\s]+/, '');
 		  
 		  if(res.length > maxChars) {
 			res = res.substring(0, maxChars);
