@@ -210,11 +210,11 @@
 		  //var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '|n|');
 		  var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '');
 		  //var endPos = newLine.search(/(<hr\/>|<hr>)/);
-		  var endPos = newLine.indexOf("<hr>");
+		  var endPos = cont.indexOf("<hr>");
 		  var regex = /(<([^>]+)>)/ig;
 			
 		  if(endPos > 0) {    
-			var intro = newLine.slice(0, endPos);    
+			var intro = newLine.substring(0, endPos);    
 			var res = intro.replace(regex, ''); 
 			//res = res.replace(/[|n|]+/g, '<br>');
 		  } else {
