@@ -228,7 +228,7 @@
 			res = res.substring(0, res.lastIndexOf(" ")) + '...';
 		  }
 		  
-		  return 'Pos: ' + endPos.toString();
+		  return 'Pos1: ' + endPos.toString();
 		}
 		function getImg(cont) {
 		  // Retrieve the first image source from the content of the page
