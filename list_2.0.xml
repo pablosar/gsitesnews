@@ -227,7 +227,7 @@
 			res = res.substring(0, res.lastIndexOf(" ")) + '...';
 		  }
 		  
-		  return res;
+		  return endPos;
 		}
 		function getImg(cont) {
 		  // Retrieve the first image source from the content of the page
