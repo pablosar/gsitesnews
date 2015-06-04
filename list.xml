@@ -209,19 +209,20 @@
 		}
 
 		function getIntro(cont) {
-		  //var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '|n|');
-		  var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '');
-		  var endPos = newLine.search(/(<hr\/>|<hr>)/);
+		  var nRegex = /<\/div>[\n\r]*<div>/g;
+		  var newLine = cont.replace(nRegex, '. ');
+		  var endPos = newLine.search(/(<hr\/>|<hr \/>|<hr>)/);
 		  var regex = /(<([^>]+)>)/ig;
 			
 		  if(endPos > 0) {    
-			var intro = newLine.slice(0, endPos);    
+			var intro = newLine.substring(0, endPos);    
 			var res = intro.replace(regex, ''); 
-			//res = res.replace(/[|n|]+/g, '<br>');
 		  } else {
 			var res = newLine.replace(regex, ''); 
-			//res = res.replace(/[|n|]+/g, '<br>');
 		  }
+		  
+		res = res.replace(/^[\.\s]+/, '');
+		res = res.replace(/(\.\s\.\s)+/, '. ');
 		  
 		  if(res.length > maxChars) {
 			res = res.substring(0, maxChars);
