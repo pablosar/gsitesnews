@@ -208,12 +208,12 @@
 		}
 		function getIntro(cont) {
 		  //var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '|n|');
-		  var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '');
+		  //var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '');
 		  //var newLine = cont.toString();
-		  var endPos = newLine.search(/(<hr\/>|<hr \/>|<hr>)/);
+		  var endPos = cont.search(/(<hr\/>|<hr \/>|<hr>)/);
 		  //var hrRegex = /<hr>/;
 		  //var endPos = hrRegex.exec(newLine);
-		  /*var regex = /(<([^>]+)>)/ig;
+		  var regex = /(<([^>]+)>)/ig;
 			
 		  if(endPos > 0) {    
 			var intro = newLine.substring(0, endPos);    
@@ -227,9 +227,9 @@
 		  if(res.length > maxChars) {
 			res = res.substring(0, maxChars);
 			res = res.substring(0, res.lastIndexOf(" ")) + '...';
-		  }*/
+		  }
 		  
-		  return endPos;
+		  return res;
 		}
 		function getImg(cont) {
 		  // Retrieve the first image source from the content of the page
