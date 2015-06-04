@@ -216,11 +216,11 @@
 		  var regex = /(<([^>]+)>)/ig;
 			
 		  if(endPos > 0) {    
-			var intro = newLine.substring(0, endPos);    
+			var intro = cont.substring(0, endPos);    
 			var res = intro.replace(regex, ''); 
 			//res = res.replace(/[|n|]+/g, '<br>');
 		  } else {
-			var res = newLine.replace(regex, ''); 
+			var res = cont.replace(regex, ''); 
 			//res = res.replace(/[|n|]+/g, '<br>');
 		  }
 		  
