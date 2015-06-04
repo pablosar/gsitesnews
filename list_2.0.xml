@@ -211,19 +211,20 @@
 		  //var newLine = cont.replace(/(\n|\r|\n\r|\r\n)/ig, '');
 		  var newLine = cont.toString();
 		  //var endPos = newLine.search(/(<hr\/>|<hr>)/);
-		  var endPos = newLine.exec(/<hr>/);
-		  //var regex = /(<([^>]+)>)/ig;
+		  var hrRegex = /<hr>/;
+		  var endPos = hrRegex.exec(newLine);
+		  /*var regex = /(<([^>]+)>)/ig;
 			
-		  //if(endPos > 0) {    
-		//	var intro = newLine.substring(0, endPos);    
-		//	var res = intro.replace(regex, ''); 
+		  if(endPos > 0) {    
+			var intro = newLine.substring(0, endPos);    
+			var res = intro.replace(regex, ''); 
 			//res = res.replace(/[|n|]+/g, '<br>');
-		//  } else {
-		//	var res = newLine.replace(regex, ''); 
+		  } else {
+			var res = newLine.replace(regex, ''); 
 			//res = res.replace(/[|n|]+/g, '<br>');
-		//  }
+		  }
 		  
-		  /*if(res.length > maxChars) {
+		  if(res.length > maxChars) {
 			res = res.substring(0, maxChars);
 			res = res.substring(0, res.lastIndexOf(" ")) + '...';
 		  }*/
