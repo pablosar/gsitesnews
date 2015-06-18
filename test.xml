@@ -100,6 +100,8 @@
 		</div>
 	</body>
 	<script type="text/javascript">	
+		//alert(gadgets.util.getUrlParameters());
+		alert(gadgets.io.getProxyUrl());
 		//The number of items to show
 		var itemNum = 3;
 		//The number of characters to show
