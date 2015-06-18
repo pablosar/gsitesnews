@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
   <ModulePrefs title="Google Sites News"     
-    scrolling="true">
+    scrolling="true" height="100">
+	<Require feature="dynamic-height"/>
   </ModulePrefs>
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
   <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="2"/>
-  <UserPref name="item_height" display_name="Item height" required="true" default_value="100"/>
+  <UserPref name="item_height" display_name="Item height" required="true" default_value="120"/>
   <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)" required="true" default_value="100"/>
   <UserPref name="img_size" display_name="Thumbnail picture size" required="true" default_value="100"/>
   <UserPref name="show_more" display_name="Show read more button" datatype="bool" default_value="true"/>
   <UserPref name="read_more" display_name="Text for the read more button" default_value="Read More..."/>
   <UserPref name="no_cache" display_name="Cache Size (in seconds)" required="true" default_value="60"/>
+  <UserPref name="aa_height" display_name="Auto-adjust height" datatype="bool" default_value="false"/>
    <Content type="html"><![CDATA[
    <html>
 	<head>
@@ -111,9 +113,11 @@
 		//The picture size
 		var imgSize = 100;
 		//The slide height
-		var itemHeight = 100;
+		var itemHeight = 120;
 		//The cache size
 		var nocache = 60;
+		//Auto-adjust height
+		var aaHeight = false;
 		
 		function getHtml() {
 			//Get the user preferences
@@ -128,6 +132,7 @@
 			imgSize = prefs.getInt("img_size");
 			itemHeight = prefs.getInt("item_height");
 			nocache = prefs.getInt("no_cache");
+			aaHeight = prefs.getBool("aa_height");
 			
 			//Params to set the request
 			var params = {};  		  
@@ -146,7 +151,7 @@
 		  if (url.indexOf("?") > -1) {
 		    sep = "&";
 		  }
-		  url = [ url, sep, "nocache=", ts ].join("");
+		  url = [ url, sep, "nocache=", ts, "&max-results=", itemNum ].join("");
 		  gadgets.io.makeRequest(url, callback, params);
 		}	
 		function makeSlides(obj) {
@@ -186,7 +191,12 @@
 				}
 				
 				
-				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul>' + more; 				
+				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul>' + more; 		
+								
+				//Auto-adjust the height
+				if(aaHeight) {					
+					gadgets.window.adjustHeight();					
+				}
 			}
 		}
 		
