@@ -151,7 +151,7 @@
 		  if (url.indexOf("?") > -1) {
 		    sep = "&";
 		  }
-		  url = [ url, sep, "nocache=", ts ].join("");
+		  url = [ url, sep, "nocache=", ts, "&max-results=", itemNum ].join("");
 		  gadgets.io.makeRequest(url, callback, params);
 		}	
 		function makeSlides(obj) {
