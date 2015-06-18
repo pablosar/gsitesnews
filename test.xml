@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
   <ModulePrefs title="Google Sites News"     
-    scrolling="true">
+    scrolling="true" height="100">
+	<Require feature="dynamic-height"/>
   </ModulePrefs>
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
   <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="2"/>
-  <UserPref name="item_height" display_name="Item height" required="true" default_value="100"/>
+  <UserPref name="item_height" display_name="Item height" required="true" default_value="120"/>
   <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)" required="true" default_value="100"/>
   <UserPref name="img_size" display_name="Thumbnail picture size" required="true" default_value="100"/>
   <UserPref name="show_more" display_name="Show read more button" datatype="bool" default_value="true"/>
@@ -112,9 +113,11 @@
 		//The picture size
 		var imgSize = 100;
 		//The slide height
-		var itemHeight = 100;
+		var itemHeight = 120;
 		//The cache size
 		var nocache = 60;
+		//Auto-adjust height
+		var adjustHeight = false;
 		
 		function getHtml() {
 			//Get the user preferences
@@ -129,6 +132,7 @@
 			imgSize = prefs.getInt("img_size");
 			itemHeight = prefs.getInt("item_height");
 			nocache = prefs.getInt("no_cache");
+			adjustHeight = prefs.getInt("adjust_height");
 			
 			//Params to set the request
 			var params = {};  		  
@@ -188,7 +192,11 @@
 				
 				
 				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul>' + more; 		
-				gadgets.window.adjustHeight();
+				
+				//Auto-adjust the height
+				if(adjustHeight) {
+					gadgets.window.adjustHeight();
+				}
 			}
 		}
 		
