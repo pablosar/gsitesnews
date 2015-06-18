@@ -100,7 +100,7 @@
 		</div>
 	</body>
 	<script type="text/javascript">	
-		alert(this.document.location);
+		alert(this.document.top.document.location);
 		//The number of items to show
 		var itemNum = 3;
 		//The number of characters to show
