@@ -13,7 +13,7 @@
   <UserPref name="show_more" display_name="Show read more button" datatype="bool" default_value="true"/>
   <UserPref name="read_more" display_name="Text for the read more button" default_value="Read More..."/>
   <UserPref name="no_cache" display_name="Cache Size (in seconds)" required="true" default_value="60"/>
-  <UserPref name="adjust_height" display_name="Auto-adjust height" datatype="bool" default_value="false"/>
+  <UserPref name="aa_height" display_name="Auto-adjust height" datatype="bool" default_value="false"/>
    <Content type="html"><![CDATA[
    <html>
 	<head>
@@ -117,7 +117,7 @@
 		//The cache size
 		var nocache = 60;
 		//Auto-adjust height
-		var adjustHeight = false;
+		var aaHeight = false;
 		
 		function getHtml() {
 			//Get the user preferences
@@ -132,7 +132,7 @@
 			imgSize = prefs.getInt("img_size");
 			itemHeight = prefs.getInt("item_height");
 			nocache = prefs.getInt("no_cache");
-			adjustHeight = prefs.getInt("adjust_height");
+			aaHeight = prefs.getInt("aa_height");
 			
 			//Params to set the request
 			var params = {};  		  
@@ -194,8 +194,9 @@
 				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul>' + more; 		
 				
 				//Auto-adjust the height
-				if(adjustHeight) {
-					gadgets.window.adjustHeight();
+				if(aaHeight) {
+					alert("adjust");
+					gadgets.window.adjustHeight();					
 				}
 			}
 		}
