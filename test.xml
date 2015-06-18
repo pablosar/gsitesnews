@@ -132,7 +132,7 @@
 			imgSize = prefs.getInt("img_size");
 			itemHeight = prefs.getInt("item_height");
 			nocache = prefs.getInt("no_cache");
-			aaHeight = prefs.getInt("aa_height");
+			aaHeight = prefs.getBool("aa_height");
 			
 			//Params to set the request
 			var params = {};  		  
@@ -192,10 +192,9 @@
 				
 				
 				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul>' + more; 		
-				
+								
 				//Auto-adjust the height
-				if(aaHeight) {
-					alert("adjust");
+				if(aaHeight) {					
 					gadgets.window.adjustHeight();					
 				}
 			}
