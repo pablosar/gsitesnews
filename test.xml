@@ -3,6 +3,7 @@
   <ModulePrefs title="Google Sites News"     
     scrolling="true" height="100">
 	<Require feature="dynamic-height"/>
+	<Require feature="setprefs"/>
   </ModulePrefs>
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
   <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
