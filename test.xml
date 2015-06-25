@@ -34,7 +34,7 @@
   				
   				if(feed.Entry) {
   					for(var i=0; i < feed.Entry.length; i++) {
-  						res += '<li><input type="button" value="'+feed.Entry[i].ID+'" onclick="getChildren(this.value)"/>'+feed.Entry[i].Title+'</li>';
+  						res += '<li><input type="button" value="'+feed.Entry[i].Link+'" onclick="getChildren(this.value)"/>'+feed.Entry[i].Title+'</li>';
   					}
   				}
   				
