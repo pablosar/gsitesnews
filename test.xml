@@ -4,8 +4,6 @@
     scrolling="true" height="100">
 	<Require feature="dynamic-height"/>
   </ModulePrefs>
-  
-  <Content type="html" view="configuration" preferred_height="270">
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
   <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="2"/>
@@ -16,6 +14,7 @@
   <UserPref name="read_more" display_name="Text for the read more button" default_value="Read More..."/>
   <UserPref name="no_cache" display_name="Cache Size (in seconds)" required="true" default_value="60"/>
   <UserPref name="aa_height" display_name="Auto-adjust height" datatype="bool" default_value="false"/>
+  <Content type="html" view="configuration" preferred_height="150">
   	Hello!	
   </Content>
    <Content type="html"><![CDATA[
