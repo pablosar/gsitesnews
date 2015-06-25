@@ -30,7 +30,7 @@
   			
   			function parseFeed(obj) {
   				var feed = obj.data;
-  				var res = ''
+  				var res = '<li>'+feed.Link+'</li>';
   				
   				if(feed.Entry) {
   					for(var i=0; i < feed.Entry.length; i++) {
