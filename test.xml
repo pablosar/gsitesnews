@@ -25,7 +25,7 @@
 				params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
 				params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(100);  
 				params[gadgets.io.RequestParameters.GET_SUMMARIES] = false; 
-  				gadgets.io.makeRequest(url, callback, params);
+  				gadgets.io.makeRequest(obj.value, callback, params);
   			}
   			
   			function parseFeed(obj) {
@@ -46,9 +46,6 @@
   			<div id="results"></div>
   		</body>
   	</html>
-  	//Get the user preferences
-	//var prefs = new gadgets.Prefs();
-	//prefs.set();
 	]]>
   </Content>
    <Content type="html"><![CDATA[
