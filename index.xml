@@ -375,7 +375,7 @@
 					var next = '1';
 					
 					var slide = '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
-					slide += getImg(feed.Entry[i].Summary) + '<p>' + getIntro(feed.Entry[i].Summary) + '</p>';
+					slide += getImg(feed.Entry[i].Summary, feed.Entry[i].Title) + '<p>' + getIntro(feed.Entry[i].Summary) + '</p>';
 					slides += '<li><div id="slide' + id + '">' + slide + '</div></li>';
 					
 					pages += '<li><a href="#query_' + id + '" id="page' + id + '" title="Go to the slide ' + id + '">&nbsp;</a></li>';
@@ -512,7 +512,7 @@
 		  return res;
 		}
 		
-		function getImg(cont) {
+		function getImg(cont, title) {
 		  // Retrieve the first image source from the content of the page
 		  // Use regexp to get the first image tag
 		  var imgRegexp = /<img.*?\/>/;
@@ -522,7 +522,7 @@
 			  // Use regexp to get the source of the previously retrieved image tag
 			  var srcRegexp = /src=\S+[^>]/;
 			  // Re-make the image tag to assure empty style
-			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' class="imgPreview" /></div>';
+			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' class="imgPreview" alt="' + title + '" title="' + title + '"/></div>';
 			  
 			  // Return the image
 			  return imgPrev;
