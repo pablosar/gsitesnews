@@ -174,7 +174,7 @@
 					var id = (i+1).toString();
 					
 					//Create a slide with the feed contents
-					var slide = getImg(feed.Entry[i].Summary) + '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
+					var slide = getImg(feed.Entry[i].Summary, feed.Entry[i].Title) + '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
 					//Show the image and the intro text only if the number of characters to show is greater than 0
 					if(maxChars > 0) {
 						slide += '<p>' + getIntro(feed.Entry[i].Summary) + '</p>';
@@ -242,7 +242,7 @@
 		  return res;
 		}
 
-		function getImg(cont) {
+		function getImg(cont, title) {
 		  // Retrieve the first image source from the content of the page
 		  // Use regexp to get the first image tag
 		  var imgRegexp = /<img.*?\/>/;
@@ -253,7 +253,7 @@
 			  var srcRegexp = /src=\S+[^>]/;
 			  var res = srcRegexp.exec(img1);
 			  // Re-make the image tag to assure empty style
-			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img ' + res.toString() + ' class="imgPreview" /></div>';
+			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img ' + res.toString() + ' class="imgPreview" alt=" + title + " title=" + title + "/></div>';
 			  
 			  // Return the image
 			  return imgPrev;
