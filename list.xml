@@ -258,7 +258,7 @@
 			  // Return the image
 			  return imgPrev;
 			} else {
-				var res = getYoutube(cont);
+				var res = getYoutube(cont, title);
 				
 				if(res != -1) {
 					return res;
@@ -269,7 +269,7 @@
 			}
 		}
 		
-		function getYoutube(cont) {
+		function getYoutube(cont, title) {
 		  // Get the preview of the media from a webpage (video thumbnail)		  
 		  // Get the youtube video id
 		  var regex = /www.youtube.com\/embed\/([\S^\?]+)\?/i;
@@ -277,7 +277,7 @@
 		  
 		  if(res != null && res.length > 1) {
 		  	//Convert the results to string
-			var tag = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" /></div>';
+			var tag = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" alt="' + title + '" title="' + title + '"/></div>';
 			//Extract the id of the video
 			//var vid = res.replace('www.youtube.com/embed/', '');
 			var vid = res[1].toString();
