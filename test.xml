@@ -333,6 +333,8 @@
 		  imgSize = prefs.getInt("img_size");
 		  nocache = prefs.getInt("no_cache");
 		  customCss = prefs.getString("custom_css");
+		  itemNum = prefs.getInt("item_num");
+		  aaHeight = prefs.getBool("aa_height");
 		  
 		  if(customCss != '') {
 			appendCSSFile(customCss);
