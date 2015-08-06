@@ -9,8 +9,10 @@
   <UserPref name="time" display_name="Transitions length (in seconds)" required="true" default_value="4"/>
   <UserPref name="width" display_name="Slider Width" required="true" default_value="350"/>
   <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
+  <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="2"/>
   <UserPref name="max_chars" display_name="Maximum Characters to Show" required="true" default_value="100"/>
   <UserPref name="img_size" display_name="Picture Preview Size" required="true" default_value="100"/>
+  <UserPref name="aa_height" display_name="Auto-adjust height" datatype="bool" default_value="false"/>
   <UserPref name="no_cache" display_name="Cache Size (in seconds)" required="true" default_value="60"/>
    <Content type="html"><![CDATA[<html>
 	<head>	
@@ -315,6 +317,10 @@
 		var imgSize = 100;
 		var nocache = 60;
 		var custom_css = '';
+		//Auto-adjust height
+		var aaHeight = false;
+		//The number of items to show
+		var itemNum = 3;
 		
 		function getHtml() {
 		  var prefs = new gadgets.Prefs();
@@ -334,7 +340,7 @@
 		  
 		  var params = {};  		  
 		  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
-		  params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(10);  
+		  params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(itemNum);  
 		  params[gadgets.io.RequestParameters.GET_SUMMARIES] = true;   
 		    
 		  makeCachedRequest(url, makeSlides, params, nocache);
@@ -349,7 +355,7 @@
 		  if (url.indexOf("?") > -1) {
 		    sep = "&";
 		  }
-		  url = [ url, sep, "nocache=", ts ].join("");
+		  url = [ url, sep, "nocache=", ts, "&max-results=", itemNum ].join("");
 		  gadgets.io.makeRequest(url, callback, params);
 		}
 			
@@ -454,6 +460,11 @@
 				document.getElementById('out_pages').outerHTML = '<ul>' + pages + '</ul>'; 			
 				document.getElementById('out_ctrls').outerHTML = ctrls; 			
 				document.getElementById('out_queries').outerHTML = queries; 	
+				
+				//Auto-adjust the height
+				if(aaHeight) {					
+					gadgets.window.adjustHeight();					
+				}
 			}
 		}
 		
