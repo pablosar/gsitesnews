@@ -4,531 +4,429 @@
     scrolling="true">
   </ModulePrefs>
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
-  <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
-  <UserPref name="time" display_name="Transitions length (in seconds)" required="true" default_value="4"/>
+  <UserPref name="custom_css" display_name="Custom Stylesheet" default_value="https://sites.google.com/a/edu.haifa.ac.il/ejsafra/default.css"/>  
+  <UserPref name="interval" display_name="Transitions length (in milliseconds)" required="true" default_value="5000"/>
   <UserPref name="width" display_name="Slider Width" required="true" default_value="350"/>
   <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
+  <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="3"/>
   <UserPref name="max_chars" display_name="Maximum Characters to Show" required="true" default_value="100"/>
   <UserPref name="img_size" display_name="Picture Preview Size" required="true" default_value="100"/>
+  <UserPref name="aa_height" display_name="Auto-adjust height" datatype="bool" default_value="false"/>
   <UserPref name="no_cache" display_name="Cache Size (in seconds)" required="true" default_value="60"/>
    <Content type="html"><![CDATA[<html>
-	<head>	
+	<head>			
 		<style>
-		@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-		#slideshow {
-			position: relative;
-			left: 60px;
-			top: 10px;
-			font-family: 'Open Sans';
-			font-weight: 400;
-		  	font-size: 10pt;
-		}
-		h1, h2, h3, h4, h5, h6 {
-			font-family: "Trebuchet MS", Helvetica, sans-serif;
-		}
-		#slideshow p {
-			font-family: 'Open Sans';
-		}
-		#slider {
-			-webkit-border-radius: 5px;
-			-moz-border-radius: 5px;
-			-o-border-radius: 5px;
-			border-radius: 5px;
-			border: 1px solid #f0f0f0;
-			-webkit-box-shadow: 2px 2px 2px gray;
-			-moz-box-shadow: 2px 2px 2px gray;
-			-o-box-shadow: 2px 2px 2px gray;
-			box-shadow: 2px 2px 2px gray;				
-			position: relative;				
-			overflow: hidden;
-		}
-		#slider a {
-			color: #d10000;
-			text-decoration: none;
-		}
-		#slider a:hover {
-			text-decoration: underline;
-		}
-		#slider a:visited {
-			color: #8b0000;
-		}
-		#slider_inner, #slider_anim {
-			position: absolute;
-			left: 0px;
-			top: 0px;								
-		}
-		#slider ul {
-			margin: 0;
-			padding: 0;					
-		}
-		#slider ul li {
-			display: inline;
-			float: left;
-			margin: 0;
-			padding: 0;				
-			list-style: none;
-			background-color: #ffffff;
-		}
-		#slider ul li div {
-			padding: 10px;
-		}
-		#slider_inner {				
-			display: none;
-		}
-		#slider_inner {				
-			-webkit-transition: left 0.2s ease-in-out;
-			-moz-transition: left 0.2s ease-in-out;
-			-o-transition: left 0.2s ease-in-out;
-			transition: left 0.2s ease-in-out;				
-		}
-		#mark {
-			position: absolute;				
-			top: 0px;
-			width: 10px;
-			height: 10px;
-			border: none;
-			background-color: #9f0000;
-			-webkit-border-radius: 50%;
-			-moz-border-radius: 50%;
-			-o-border-radius: 50%;
-			border-radius: 50%;
-			-webkit-box-shadow: 1px 1px 5px gray inset;
-			-moz-box-shadow: 1px 1px 5px gray inset;
-			-o-box-shadow: 1px 1px 5px gray inset;
-			box-shadow: 1px 1px 5px gray inset;
-			z-index: 10;
-		}
-		#pages {
-			position: relative;				
-			top: 10px;
-			text-align: center;
-		}
-		#pages ul {
-			margin: 0;
-			padding: 0;
-			text-align: center;
-		}
-		#pages li {
-			list-style: none;
-			display: inline;
-		}
-		#pages li a {
-			position: relative;
-			display: inline-block;
-			width: 10px;
-			height: 10px;
-			text-decoration: none;
-			font-family: arial;				
-			-webkit-border-radius: 50%;
-			-moz-border-radius: 50%;
-			-o-border-radius: 50%;
-			border-radius: 50%;
-			-webkit-box-shadow: 1px 1px 5px gray inset;
-			-moz-box-shadow: 1px 1px 5px gray inset;
-			-o-box-shadow: 1px 1px 5px gray inset;
-			box-shadow: 1px 1px 5px gray inset;
-			margin-right: 3px;
-			margin-left: 3px;
-			z-index: 20;
-			font-size: 8pt;
-			font-weight: bold;
-		}
-		#pages li a:active {
-			background-color: rgba(0, 0, 255, 1);
-		}
-		#pages li a:hover {
-			background-color: rgba(0, 0, 255, 0.3);
-		}			
-		#slider_playback {
-			background-color: rgba(0, 0, 0, 0.3);
-		}
-		#slideshow #play, #slideshow #pause {
-			display: none;
-			position: absolute;
-			width: 50px;
-			height: 50px;
-			-webkit-border-radius: 50%;
-			-moz-border-radius: 50%;
-			-o-border-radius: 50%;
-			border-radius: 50%;
-			z-index: 40;
-			background-color: rgba(0,0,0,0.2);
-			font-family: sans-serif;
-			text-align: center;
-			text-decoration: none;
-			color: rgba(255,255,255,0.9);				
-			text-shadow: 1px 1px 5px gray;
-			line-height: 50px;
-			font-size: 18pt;
-			transition: background 0.5s;
-		}
-		#slideshow #play {				
-			font-size: 24pt;
-		}
-		#slideshow #play:hover, #slideshow #pause:hover {
-			background-color: rgba(0,0,0,0.4);
-		}
-		#slideshow:hover > #pause {
-			display: block;
-		}			
-		#slideshow #play:active, #slideshow #pause:active {
-			margin-top: 2px;
-			background-color: rgba(0,0,0,0.6);
-		}
-		#query_play:target ~ #slideshow #slider #slider_anim {
-			display: block;
-		}
-		#query_play:target ~ #slideshow #slider #slider_inner {
-			display: none;
-		}
-		#query_play:target ~ #slideshow #play {
-			display: none;
-		}
-		#query_pause:target ~ #slideshow #slider #slider_anim {
-			display: none;
-		}
-		#query_pause:target ~ #slideshow #slider #slider_inner {
-			display: block;
-		}
-		#query_pause:target ~ #slideshow #pages #page1 {
-			background-color: #9f0000;
-		}
-		.prev, .next {
-			text-decoration: none;
-			position: absolute;
-			width: 40px;
-			height: 40px;
-			font-family: "Trebuchet MS", Helvetica, sans-serif;
-			text-align: center;
-			font-size: 24pt;
-			color: #ffffff;
-			text-shadow: 0px  0px 1px #ffffff;				
-			background: -webkit-radial-gradient(#0288D1 60%, #01579B 100%);
-			background: -moz-radial-gradient(#0288D1 60%, #01579B 100%);
-			background: -o-radial-gradient(#0288D1 60%, #01579B 100%);
-			background: radial-gradient(#0288D1 60%, #01579B 100%);					
-			-webkit-border-radius: 50%;
-			-moz-border-radius: 50%;
-			-o-border-radius: 50%;
-			border-radius: 50%;				
-			-webkit-box-shadow: 1px 1px 5px gray;
-			-moz-box-shadow: 1px 1px 5px gray;
-			-o-box-shadow: 1px 1px 5px gray;
-			box-shadow: 1px 1px 5px gray;	
-			border-bottom: 1px solid #01579B;
-			border-right: 1px solid #01579B;
-			cursor: pointer;
-			z-index: 30;				
-			font-weight: bold;
-			display: none;
-		}
-		.prev:visited, .next:visited {
-			color: #ffffff;
-		}
-		.prev:link, .next:link {
-			color: #ffffff;
-		}
-		.prev:hover, .next:hover {
-			margin-top: -1px;	
-			-webkit-box-shadow: 2px 2px 5px gray;
-			-moz-box-shadow: 2px 2px 5px gray;
-			-o-box-shadow: 2px 2px 5px gray;
-			box-shadow: 2px 2px 5px gray;	
-		}
-		.prev:active, .next:active {
-			margin-top: 1px;
-			-webkit-box-shadow: 0px 0px 5px gray;
-			-moz-box-shadow: 0px 0px 5px gray;
-			-o-box-shadow: 0px 0px 5px gray;
-			box-shadow: 0px 0px 5px gray;
-		}
-		.prev {
-			left: -50px;
-		}
-		.queries:target ~ #slideshow .prev,
-		.queries:target ~ #slideshow .next {
-			display: none;
-		}
-		#slideshow #prev1, #slideshow #next1 {
-			display: block;
-		}
-		#query_pause:target ~ #slideshow #play {
-			display: block;
-		}
-		#query_pause:target ~ #slideshow #pages #mark,
-		#query_pause:target ~ #slideshow #pause {
-			display: none;
-		}
-		.imgPreview {
-			position: absolute;
-			left: 50%;
-			top: 50%;			
-			width: 100%;
-			height: auto;
-			-webkit-transform: translate(-50%,-50%);
-			-ms-transform: translate(-50%,-50%);
-			-o-transform: translate(-50%,-50%);
-			transform: translate(-50%,-50%);
-		}
-		.thumbnail {
-			position: relative;
-			overflow: hidden;
-			float: left;
-			padding: 2px;
-			border: 1px solid #cacaca;
-			border-bottom: 2px solid #cacaca;
-			margin-right: 10px;
-		}
+			#slideshow {
+				position: relative; 
+				overflow: hidden;
+				width: 252px;
+				height: 134px;
+			}
+			#slider_inner {
+				position: relative;
+				overflow: hidden;
+				width: 200px;
+				height: 100px;
+				left: 30px;
+			}
+			.slide {
+				position: absolute;
+				display: inline-block;
+				padding: 0px;
+				top:0px;
+				left:0px;
+				opacity: 0;			
+				-webkit-transition: opacity 0.6s ease-in-out;
+				-moz-transition: opacity 0.6s ease-in-out;
+				-o-transition: opacity 0.6s ease-in-out;
+				transition: opacity 0.6s ease-in-out;	
+			}
+			.innerSlide {
+				padding: 10px;
+			}
+			#prev, #next {
+				position: absolute;
+				display: inline-block;
+				top: 40px;				
+				width: 25px;
+				height: 30px;								
+				text-align: center;				
+				cursor: pointer;
+				-webkit-transition: all 0.1s ease-in-out;
+				-moz-transition: all 0.1s ease-in-out;
+				-o-transition: all 0.1s ease-in-out;
+				transition: all 0.1s ease-in-out;	
+			}
+			#prev {				
+				left: 5px;
+				border-radius: 3px 0px 0px 3px;
+			}
+			#prev span {
+				display: inline-block;
+				margin-top: 5px;
+				margin-bottom: 5px;
+				width: 0px;
+				height: 0px;				
+				border-top: 10px solid transparent;
+				border-bottom: 10px solid transparent;
+				border-right: 10px solid rgba(255, 255, 255, 0.95);
+			}
+			#next {				
+				right: 5px;
+				border-radius: 0px 3px 3px 0px;
+			}
+			#next span {
+				display: inline-block;
+				margin-top: 5px;
+				margin-bottom: 5px;
+				width: 0px;
+				height: 0px;				
+				border-top: 10px solid transparent;
+				border-bottom: 10px solid transparent;
+				border-left: 10px solid rgba(255, 255, 255, 0.95);
+			}
+			#prev:hover, #next:hover {
+				margin-top: -1px;
+				box-shadow: 1px 1px 3px #000000;
+			}
+			#prev:active, #next:active {
+				margin-top: 0px;
+				box-shadow: 2px 2px 3px #000000 inset;
+			}
+			#idxs {
+				position: absolute;
+				bottom: 5px;
+				right: 5px;
+				text-align: center;			
+			}
+			#idxs div {
+				position: relative;
+				display: inline-block;								
+				box-shadow: 2px 2px 4px #808080 inset;
+				color: gray;
+				cursor: pointer;
+				border-radius: 50%;
+				margin-left: 5px;
+				-webkit-transition: all 0.6s ease-in-out;
+				-moz-transition: all 0.6s ease-in-out;
+				-o-transition: all 0.6s ease-in-out;
+				transition: all 0.6s ease-in-out;
+			}
+			#playback {
+				position: absolute;
+				display: inline-block;
+				top: 25px;
+				right: 20px;				
+				width: 0px;
+				height: 0px;				
+				border-radius: 5px;
+				text-align: center;				
+				cursor: default;
+				z-index: 999999;
+				opacity: 0;
+				-webkit-transition: all 0.4s ease-in-out;
+				-moz-transition: all 0.4s ease-in-out;
+				-o-transition: all 0.4s ease-in-out;
+				transition: all 0.4s ease-in-out;				
+			}
+			#playback span {
+				display: inline-block;
+				margin-top: 25%;
+				margin-bottom: 25%;
+				margin-right: 10%;
+				margin-left: 10%;
+				width: 20%;
+				height: 50%;
+				background-color: #FFFFFF;
+			}
 		</style>
 	</head>
 	<body>
-		<span id="query_play"></span>
-		<span id="query_pause"></span>
-		<div id="out_queries"></div>		
-		
 		<div id="slideshow">
-			<div id="out_ctrls"></div>	
-			
-			<a href="#query_play" title="Play" id="play">&#9658;</a>
-			<a href="#query_pause" title="Pause" id="pause">II</a>
-			
 			<div id="slider">
-				<div id="slider_anim">Loading...
+				<div id="playback" onmouseover="playback(false);" onmouseout="playback(true);" title="Paused">
+					<span></span><span></span>
 				</div>
-				<div id="slider_inner">
+				<div id="prev" onclick="goSlide(-1);" title="Go to the previous slide">
+					<span></span>
 				</div>
-			</div>
-			
-			<div id="pages">
-				<div id="mark"></div>
-				<div id="out_pages"></div>
+				<div id="slider_inner" onmouseover="playback(false);" onmouseout="playback(true);" title="Paused">Loading...
+				</div>
+				<div id="next" onclick="goSlide(1);" title="Go to the next slide">
+					<span></span>
+				</div>
+				<div id="idxs"></div>
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript">		
-		var w = 350;
-		var h = 200;
-		var t = 4;
-		var bg = '#f9f9f9';
-		var maxChars = 100;
+	<script type="text/javascript">
+		//The interval of time between slides
+		var interval = 5000;
+		//The width and the height of the slider
+		var slideWidth = 300;
+		var slideHeight = 200;
+		//The maximum number of characters to retrieve from each rss page
+		var maxChars = 100;		
+		//The size of the image in the slide
 		var imgSize = 100;
+		//The cache size
 		var nocache = 60;
+		//The url for a customized css
+		var customCss = 'default.css';
+		//Auto-adjust height
+		var aaHeight = false;
+		//The number of items to show
+		var itemNum = 3;
 		
 		function getHtml() {
-		  var prefs = new gadgets.Prefs();
-		  var url = prefs.getString("rss_url");
-		  bg = prefs.getString("bg");
-		  t = prefs.getInt("time");
-		  w = prefs.getInt("width");
-		  h = prefs.getInt("height");
-		  maxChars = prefs.getInt("max_chars");
-		  imgSize = prefs.getInt("img_size");
-		  nocache = prefs.getInt("no_cache");
+			//Get the user preferences
+			var prefs = new gadgets.Prefs();
+			//The url to retrieve the rss pages
+			var url = prefs.getString("rss_url");
 		  
-		  var params = {};  		  
-		  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
-		  params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(10);  
-		  params[gadgets.io.RequestParameters.GET_SUMMARIES] = true;   
+			interval = prefs.getInt("interval");
+			slideWidth = prefs.getInt("width");
+			slideHeight = prefs.getInt("height");
+			maxChars = prefs.getInt("max_chars");
+			imgSize = prefs.getInt("img_size");
+			nocache = prefs.getInt("no_cache");
+			customCss = prefs.getString("custom_css");
+			itemNum = prefs.getInt("item_num");
+			aaHeight = prefs.getBool("aa_height");
+		  
+			//Append the custom css to the html
+			if(customCss != '') {
+				appendCSSFile(customCss);
+			}
+		  
+			//The parameters for the request
+			var params = {};  		  
+			params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+			params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(itemNum);  
+			params[gadgets.io.RequestParameters.GET_SUMMARIES] = true;   
 		    
-		  makeCachedRequest(url, makeSlides, params, nocache);
+			//Make a cached request for the rss data and then call the function addSlides to parse it
+			makeCachedRequest(url, addSlides, params, nocache);
 		};
 		
 		function makeCachedRequest(url, callback, params, refreshInterval) {
-		  var ts = new Date().getTime();
-		  var sep = "?";
-		  if (refreshInterval && refreshInterval > 0) {
-		    ts = Math.floor(ts / (refreshInterval * 1000));
-		  }
-		  if (url.indexOf("?") > -1) {
-		    sep = "&";
-		  }
-		  url = [ url, sep, "nocache=", ts ].join("");
-		  gadgets.io.makeRequest(url, callback, params);
-		}
+			//Make a cached request
+			//Get the current time
+			var ts = new Date().getTime();
+			var sep = "?";
 			
-		function makeSlides(obj) {
+			//Calculate the expiration time for the cached response
+			if (refreshInterval && refreshInterval > 0) {
+				ts = Math.floor(ts / (refreshInterval * 1000));
+			}
+			
+			//Add the extra parameters for the cached request as querystrings to the rss url
+			if (url.indexOf("?") > -1) {
+				sep = "&";
+			}
+			url = [ url, sep, "nocache=", ts, "&max-results=", itemNum ].join("");
+			
+			//Make the request and call the callback function
+			gadgets.io.makeRequest(url, callback, params);
+		}
+		
+		function addSlides(obj) {
+			//The callback function to parse the rss data into slides
 			// obj.data contains the feed data
 			var feed = obj.data;
 			
-			if (feed.Entry) {
-				makeCSS(feed.Entry.length);
+			//Adjust the slider size according to the user preferences
+			document.getElementById('slideshow').style.width = slideWidth + 62;
+			document.getElementById('slideshow').style.height = slideHeight + 27;
+			document.getElementById('slider_inner').style.width = slideWidth;
+			document.getElementById('slider_inner').style.height = slideHeight;
+			//Adjust the position of the previous and next buttons
+			document.getElementById('next').style.top = (slideHeight-30)/2;
+			document.getElementById('prev').style.top = (slideHeight-30)/2;
+			
+			//Get the element where to put the data
+			var sliderObj = document.getElementById('slider_inner');
+			//Get the element where to put the pagination indexes (the links to each slide)
+			var idxObj = document.getElementById('idxs');
+			
+			//Clear the data in the slider
+			sliderObj.innerHTML = '';
+			
+			//Set the maximum number of slideshow
+			window.itemNum = feed.Entry.length;
+			
+			//Put the data into the slider
+			for(var i = 0; i < feed.Entry.length; i++) {
+				var idStr = (i + 1).toString();
+				var slide = '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
+				slide += getImg(feed.Entry[i].Summary, feed.Entry[i].Title) + '<p>' + getIntro(feed.Entry[i].Summary) + '</p>';
 				
-				var slides = '';
-				var pages = '';
-				var ctrls = '';
-				var queries = '';
-				var queriesCSS = '';
-				var markerKf = '';
-				var sliderKf = '';			
-				// The percentage for each key frame
-				var perKf = 100 / feed.Entry.length;
-				//The percentage for each transition between keyframes (two percent of the keyframe)
-				var perTrans = perKf * 0.8;
-				//The starting position for the marker
-				var markStart = (w - (16 * feed.Entry.length) + 6) / 2;
-				//The percentage for each transition of the marker
-				var markTrans = (Math.round(perKf * 0.2 / 3) * 100) / 100;
-				
-				for(var i=0; i < feed.Entry.length; i++){
-					var id = (i+1).toString();
-					var prev = '1';
-					var next = '1';
 					
-					var slide = '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
-					slide += getImg(feed.Entry[i].Summary, feed.Entry[i].Title) + '<p>' + getIntro(feed.Entry[i].Summary) + '</p>';
-					slides += '<li><div id="slide' + id + '">' + slide + '</div></li>';
-					
-					pages += '<li><a href="#query_' + id + '" id="page' + id + '" title="Go to the slide ' + id + '">&nbsp;</a></li>';
-					
-					if(i <= 0) {
-						prev = feed.Entry.length.toString();
-						next = (i+2).toString();
-						
-						var thisPerTrans = Math.round(perTrans * 100) / 100;
-						sliderKf += '0%, ' + thisPerTrans.toString() + '%, 100% {left: 0px;}\n';					
-											
-						markerKf += '0%, 100% {left: ' + markStart + 'px; opacity: 1;}\n';					
-						markerKf += thisPerTrans.toString() + '% {left: ' + markStart + 'px; opacity: 1;}\n';					
-						markerKf += (thisPerTrans + markTrans).toString() + '% {left: ' + markStart + 'px; opacity: 0;}\n';
-
-						queriesCSS += '#query_' + id + ':target ~ #slideshow #slider #slider_inner {display: block; left: 0px;}\n';
-					} else if((i+1) >= feed.Entry.length) {
-						prev = i.toString();
-						next = '1';		
-						
-						var thisPerKf = Math.round(perKf * i * 100) / 100;
-						var thisPerTrans = Math.round((thisPerKf + perTrans) * 100) / 100;
-						sliderKf += thisPerKf.toString() + '% {left: -' + (i * 100).toString() + '%;}\n';
-						sliderKf += thisPerTrans.toString() + '% {left: -' + (i * 100).toString() + '%;}\n';
-						
-						var markPos = markStart + (16 * i);
-						markerKf += (thisPerKf - markTrans).toString() + '% {left: ' + markPos + 'px; opacity: 0;}\n';
-						markerKf += thisPerKf.toString() + '% {left: ' + markPos + 'px; opacity: 1;}\n';
-						markerKf += thisPerTrans.toString() + '% {left: ' + markPos + 'px; opacity: 1;}\n';
-						markerKf += (thisPerTrans + markTrans).toString() + '% {left: ' + markPos + 'px; opacity: 0;}\n';
-						markerKf += (thisPerTrans + (markTrans * 2)).toString() + '% {left: ' + markStart + 'px; opacity: 0;}\n';
-						
-						queriesCSS += '#query_' + id + ':target ~ #slideshow #slider #slider_inner {display: block; left: -' + (i * 100).toString() + '%;}\n';
-					} else {
-						prev = i.toString();
-						next = (i+2).toString();
-						
-						var thisPerKf = Math.round(perKf * i * 100) / 100;
-						var thisPerTrans = Math.round((thisPerKf + perTrans) * 100) / 100;
-						sliderKf += thisPerKf.toString() + '% {left: -' + (i * 100).toString() + '%;}\n';
-						sliderKf += thisPerTrans.toString() + '% {left: -' + (i * 100).toString() + '%;}\n';
-						
-						var markPos = markStart + (16 * i);
-						markerKf += (thisPerKf - markTrans).toString() + '% {left: ' + markPos + 'px; opacity: 0;}\n';
-						markerKf += thisPerKf.toString() + '% {left: ' + markPos + 'px; opacity: 1;}\n';
-						markerKf += thisPerTrans.toString() + '% {left: ' + markPos + 'px; opacity: 1;}\n';
-						markerKf += (thisPerTrans + markTrans).toString() + '% {left: ' + markPos + 'px; opacity: 0;}\n';
-						
-						queriesCSS += '#query_' + id + ':target ~ #slideshow #slider #slider_inner {display: block; left: -' + (i * 100).toString() + '%;}\n';
-					}
-					
-					ctrls += '<a href="#query_' + prev + '" title="Go to the slide ' + prev + '" class="prev" id="prev' + id + '">&lt;</a>';
-					ctrls += '<a href="#query_' + next + '" title="Go to the slide ' + next + '" class="next" id="next' + id + '">&gt;</a>';
-					
-					queries += '<span id="query_' + id + '" class="queries"></span>';
-					queriesCSS += '#query_' + id + ':target ~ #slideshow #play {display: block;}\n';
-					queriesCSS += '#query_' + id + ':target ~ #slideshow #pause {display: none;}\n';
-					queriesCSS += '#query_' + id + ':target ~ #slideshow #pages #mark {display: none;}\n';
-					queriesCSS += '#query_' + id + ':target ~ #slideshow #slider #slider_anim {display: none;}\n';
-					queriesCSS += '#query_' + id + ':target ~ #slideshow #pages #page' + id + ' {background-color: #9f0000;}\n';
-					queriesCSS += '#query_' + id + ':target ~ #slideshow #prev' + id + ',  #query_' + id + ':target ~ #slideshow #next' + id + ' {display: block;}\n';
-					
-				}
-				
-				var css = makeVendors('@__VENDORS__keyframes slider {' + sliderKf + '}\n@__VENDORS__keyframes marker {' + markerKf + '}\n');
-				appendCSS(css + queriesCSS);
-				
-				document.getElementById('slider_anim').innerHTML = '<ul>' + slides + '</ul>'; 
-				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul>'; 
-				document.getElementById('out_pages').outerHTML = '<ul>' + pages + '</ul>'; 			
-				document.getElementById('out_ctrls').outerHTML = ctrls; 			
-				document.getElementById('out_queries').outerHTML = queries; 	
+				sliderObj.innerHTML += '<div id="slide' + idStr + '" style="z-index:' + (feed.Entry.length - i).toString() + ';" class="slide"><div class="innerSlide">' + slide + '</div></div>';
+				idxObj.innerHTML += '<div id="idx' + idStr + '" onclick="goSlide(' + idStr + ', true)" title="' + feed.Entry[i].Title + '">&nbsp;</div>';
+			}
+			
+			//Start the slider
+			startSlider();
+		}
+			
+		function startSlider() {
+			//Start to play the slider
+			//Show the first slide
+			document.getElementById('slide1').style.opacity = 1;
+			document.getElementById('idx1').style.background = 'rgba(1, 87, 155, 0.65)';
+			document.getElementById('idx1').style.boxShadow = '0px 0px 3px rgba(1, 87, 155, 0.65)';
+			
+			//Set the counter
+			window.counter = 1;
+			
+			//Set the interval to start the playback
+			window.timer = setInterval(playSlide, window.interval);			
+		}
+			
+		function playSlide(idx) {
+			//Function activated in intervals, show a slide
+			//Get the index - the number of slides to jump forward or backwards
+			idx = typeof idx !== 'undefined' ? idx : 1;
+			
+			//Get the slide previously shown
+			var prev = window.counter;
+			
+			//Set the counter to jump to the new slide
+			window.counter += idx;
+			
+			//Check if the previous was the last slide
+			if(window.counter > window.itemNum) {
+				//If so set the first slide as the next slide to show
+				window.counter = 1;
+				prev = window.itemNum;
+			} else if(window.counter < 1) {
+				//If the slider is being played backwards
+				window.counter = window.itemNum;
+				prev = 1;
+			}
+			
+			//Hide the previous slide
+			document.getElementById('slide' + prev.toString()).style.opacity = 0;
+			document.getElementById('slide' + prev.toString()).style.zIndex = prev;			
+			document.getElementById('idx' + prev.toString()).style.background = '';			
+			document.getElementById('idx' + prev.toString()).style.boxShadow = '';	
+			
+			//Show the next one
+			document.getElementById('slide' + window.counter.toString()).style.opacity = 1;
+			document.getElementById('slide' + window.counter.toString()).style.zIndex = (window.itemNum + 1);
+			document.getElementById('idx' + window.counter.toString()).style.background = 'rgba(1, 87, 155, 0.65)';				
+			document.getElementById('idx' + window.counter.toString()).style.boxShadow = '0px 0px 3px rgba(1, 87, 155, 0.65)';							
+		}
+		
+		function goSlide(idx, jump) {
+			//Go to a specific slide (if jump is set) or go to the next/previous slide
+			jump = typeof jump !== 'undefined' ? jump : false;
+			
+			//If the jump variable is set to true
+			if(jump == true) {
+				//Calculate the index in order to jump to the specific slide
+				idx = idx - window.counter;
+			}
+			
+			//Clear the interval
+			window.clearInterval(window.timer);
+			//Go to the specific slide
+			playSlide(idx);
+			//Reset the interval
+			window.timer = setInterval(playSlide, window.interval);
+		}
+		
+		function playback(bool) {
+			//Function to pause/play the slider
+			//Get the playback element (the pause icon)
+			var obj = document.getElementById('playback');
+			
+			//If the boolean value is true
+			if(bool==true) {
+				//Play the slider (reset the interval) and hide the pause icon
+				window.timer = setInterval(playSlide, window.interval);	
+				obj.style.opacity = 0;
+				obj.style.right = '';
+				obj.style.fontSize = '';
+				obj.style.width = '';
+				obj.style.height = '';					
+				obj.style.top = '';					
+			} else {
+				//Pause the slider (clear the interval) and show the pause icon
+				window.clearInterval(window.timer);					
+				obj.style.opacity = 1;
+				obj.style.right = '35px';
+				obj.style.fontSize = '18pt';
+				obj.style.width = '30px';
+				obj.style.height = '30px';
+				obj.style.top = '5px';
 			}
 		}
 		
-		function makeCSS(objsNum) {
-			var dur = (t * objsNum).toString();
-			var css = 'body {background-color: ' + bg + ';}\n';
-			css += '#slideshow {width: ' + (w + 40).toString() + 'px;}\n';
-			css += '#slider {width: ' + w.toString() + 'px; height: ' + h.toString() + 'px;}\n';
-			css += '#slider ul {width: ' + (objsNum * 100).toString() + '%;}\n';
-			css += '#slider ul li {width: ' + w.toString() + 'px; height: ' + h.toString() + 'px;}\n';
-			css += '#slider_anim {-webkit-animation: slider ' + dur + 's infinite; -moz-animation: slider ' + dur + 's infinite; -o-animation: slider ' + dur + 's infinite; animation: slider ' + dur + 's infinite;}\n';
-			css += '#mark {left: 0px;	-webkit-animation: marker ' + dur + 's infinite; -moz-animation: marker ' + dur + 's infinite; -o-animation: marker ' + dur + 's infinite; animation: marker ' + dur + 's infinite;}\n';
-			css += '#pages {width: ' + w.toString() + 'px;}\n';
-			css += '#slider_playback {width: ' + w.toString() + 'px; height: ' + h.toString() + 'px;}\n';
-			css += '#slideshow #play, #slideshow #pause {left: ' + ((w - 50) / 2).toString()  + 'px; top: ' + ((h - 50) / 2).toString()  + 'px;}\n';
-			css += '.prev, .next {top: ' + ((h - 40) / 2).toString() + 'px;}\n';
-			css += '.next {left: ' + (w + 10).toString() + 'px;}\n';
-			
-			appendCSS(css);
-		}		
-		
-		function appendCSS(css) {
-			var elem = document.createElement('style');
-			elem.type = 'text/css';	
-			elem.appendChild(document.createTextNode(css));
-			document.getElementsByTagName("head")[0].appendChild(elem);
-		}
-		
-		function makeVendors(css) {
-			var vendors = ['-webkit-', '-moz-', '-o-', ''];
-			var res = '';
-			
-			for(var i=0; i < vendors.length; i++){
-				res += css.replace(/__VENDORS__/g, vendors[i]);
-			}
-			
-			return res;
+		function appendCSSFile(fileCSS){
+			//Append an css file to the html
+			var elem = document.createElement('link');
+			elem.type = 'text/css';
+			elem.rel = 'stylesheet';
+			elem.href = fileCSS;	
+			document.getElementsByTagName("head")[0].appendChild(elem);			
 		}
 		
 		function getIntro(cont) {
-		  var nRegex = /<\/div>[\n\r]*<div>/g;
-		  var newLine = cont.replace(nRegex, '. ');
-		  var endPos = newLine.search(/(<hr\/>|<hr \/>|<hr>)/);
-		  var regex = /(<([^>]+)>)/ig;
+			//Get the intro text from the rss page
+			//Use regex to get the new lines
+			var nRegex = /<\/div>[\n\r]*<div>/g;
+			var newLine = cont.replace(nRegex, '. ');
+			//Get the position of the hr tag if any
+			var endPos = newLine.search(/(<hr\/>|<hr \/>|<hr>)/);
+			//Regex to eliminate the html tags
+			var regex = /(<([^>]+)>)/ig;
 			
-		  if(endPos > 0) {    
-			var intro = newLine.substring(0, endPos);    
-			var res = intro.replace(regex, ''); 
-		  } else {
-			var res = newLine.replace(regex, ''); 
-		  }
+			//If there is a hr tag
+			if(endPos > 0) {    
+				//Get the data until the hr
+				var intro = newLine.substring(0, endPos);    
+				//Clear the html tags
+				var res = intro.replace(regex, ''); 
+			} else {
+				//Clear the html tags
+				var res = newLine.replace(regex, ''); 
+			}
+			
+			//Clear multiple consecutive dots
+			res = res.replace(/^[\.\s]+/, '');
+			res = res.replace(/(\.\s\.\s)+/g, '');
+			res = res.replace(/\.\./g, '');
 		  
-		res = res.replace(/^[\.\s]+/, '');
-		res = res.replace(/(\.\s\.\s)+/g, '');
-		res = res.replace(/\.\./g, '');
-		  
-		  if(res.length > maxChars) {
-			res = res.substring(0, maxChars);
-			res = res.substring(0, res.lastIndexOf(" ")) + '...';
-		  }
-		  
-		  return res;
+			//If the data has more characters than the required
+			if(res.length > maxChars) {
+				//Get the data until the last space before the maximum number of characters
+				res = res.substring(0, maxChars);
+				res = res.substring(0, res.lastIndexOf(" ")) + '...';
+			}
+			
+			//Return the intro text
+			return res;
 		}
 		
 		function getImg(cont, title) {
-		  // Retrieve the first image source from the content of the page
-		  // Use regexp to get the first image tag
-		  var imgRegexp = /<img.*?\/>/;
-		  var img1 = imgRegexp.exec(cont);
+			// Retrieve the first image source from the content of the page
+			// Use regexp to get the first image tag
+			var imgRegexp = /<img.*?\/>/;
+			var img1 = imgRegexp.exec(cont);
 		  
-		  if(img1 != null) {
-			  // Use regexp to get the source of the previously retrieved image tag
-			  var srcRegexp = /src=\S+[^>]/;
-			  // Re-make the image tag to assure empty style
-			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' class="imgPreview" alt="' + title + '" title="' + title + '"/></div>';
+			if(img1 != null) {
+				// Use regexp to get the source of the previously retrieved image tag
+				var srcRegexp = /src=\S+[^>]/;
+				// Re-make the image tag to assure empty style
+				var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' alt="' + title + '" title="' + title + '" width="'+imgSize+'px" height="auto"/></div>';
 			  
-			  // Return the image
-			  return imgPrev;
-		  } else {
-		  	return '';
-	  	  }
+				// Return the image
+				return imgPrev;
+			} else {
+				return '';
+			}
 		}
 		
 		gadgets.util.registerOnLoadHandler(getHtml);
