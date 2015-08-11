@@ -4,7 +4,7 @@
     scrolling="true">
   </ModulePrefs>
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
-  <UserPref name="custom_css" display_name="Custom Stylesheet" default_value="https://github.com/pablosar/gsitesnews/raw/master/default.css"/>  
+  <UserPref name="custom_css" display_name="Custom Stylesheet" default_value="https://sites.google.com/a/edu.haifa.ac.il/ejsafra/default.css"/>  
   <UserPref name="interval" display_name="Transitions length (in seconds)" required="true" default_value="4"/>
   <UserPref name="width" display_name="Slider Width" required="true" default_value="350"/>
   <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
@@ -184,7 +184,7 @@
 			//The url to retrieve the rss pages
 			var url = prefs.getString("rss_url");
 		  
-			interval = prefs.getInt("time");
+			interval = prefs.getInt("interval");
 			slideWidth = prefs.getInt("width");
 			slideHeight = prefs.getInt("height");
 			maxChars = prefs.getInt("max_chars");
