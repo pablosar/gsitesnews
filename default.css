@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+body {
+	background-color: #F9F9F9;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+#slideshow p {
+	font-family: 'Open Sans';
+}
+#slider_inner {
+	border-radius: 5px;
+	border: 1px solid #f0f0f0;
+	box-shadow: 2px 2px 2px gray;
+	background-color: #FFFFFF;
+}
+#slider_inner a {
+	color: #d10000;
+	text-decoration: none;
+}
+#slider_inner a:hover {
+	text-decoration: underline;
+}
+#slider_inner a:visited {
+	color: #8b0000;
+}
+#slider_inner div {
+	background-color: #FFFFFF;
+}
+#prev, #next {
+	background: rgba(0, 0, 0, 0.65);
+}
+#idxs div {
+	width: 10px;
+	height: 10px;
+	background: #cacaca;
+}
+#idxs div:hover {				
+	background: rgba(155, 87, 1, 0.50);
+}
+#idxs div:active {				
+	background: rgba(155, 87, 1, 0.70);
+}
+#playback {
+	background: rgba(0, 0, 0, 0.25);
+}
+#playback span {
+	background-color: #FFFFFF;
+}
+.thumbnail {
+	display: inline-block;
+	float: left;
+	margin-right: 10px;	
+	width: 100px;
+	height: 100px;
+	border: 1px solid red;
+	overflow: hidden;
+}
