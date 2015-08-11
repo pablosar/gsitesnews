@@ -263,7 +263,7 @@
 				
 					
 				sliderObj.innerHTML += '<div id="slide' + idStr + '" style="z-index:' + (feed.Entry.length - i).toString() + ';" class="slide"><div class="innerSlide">' + slide + '</div></div>';
-				idxObj.innerHTML += '<div id="idx' + idStr + '" onclick="goSlide(' + idStr + ', true)" title="Go to slide ' + feed.Entry[i].Title + '">&nbsp;</div>';
+				idxObj.innerHTML += '<div id="idx' + idStr + '" onclick="goSlide(' + idStr + ', true)" title="' + feed.Entry[i].Title + '">&nbsp;</div>';
 			}
 			
 			//Start the slider
