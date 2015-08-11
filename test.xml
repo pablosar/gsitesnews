@@ -5,7 +5,7 @@
   </ModulePrefs>
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
   <UserPref name="custom_css" display_name="Custom Stylesheet" default_value="https://sites.google.com/a/edu.haifa.ac.il/ejsafra/default.css"/>  
-  <UserPref name="interval" display_name="Transitions length (in seconds)" required="true" default_value="4"/>
+  <UserPref name="interval" display_name="Transitions length (in milliseconds)" required="true" default_value="5000"/>
   <UserPref name="width" display_name="Slider Width" required="true" default_value="350"/>
   <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="3"/>
