@@ -293,7 +293,7 @@
 				//Put the image
 				if(imgSrc != '') {
 					var img = imgTemplate.replace(/#_IMAGE/, imgSrc);
-					img = img.replace(/#_TITLE/g, getIntro(feed.Entry[i].Title));
+					img = img.replace(/#_TITLE/g, feed.Entry[i].Title);
 					slide = slide.replace(/#_IMAGE/, img);
 				} else {
 					slide = slide.replace(/#_IMAGE/, '');
@@ -412,35 +412,39 @@
 		
 		function getIntro(cont) {
 			//Get the intro text from the rss page
-			//Use regex to get the new lines
-			var nRegex = /<\/div>[\n\r]*<div>/g;
-			var newLine = cont.replace(nRegex, '. ');
-			//Get the position of the hr tag if any
-			var endPos = newLine.search(/(<hr\/>|<hr \/>|<hr>)/);
-			//Regex to eliminate the html tags
-			var regex = /(<([^>]+)>)/ig;
+			var res = '';
 			
-			//If there is a hr tag
-			if(endPos > 0) {    
-				//Get the data until the hr
-				var intro = newLine.substring(0, endPos);    
-				//Clear the html tags
-				var res = intro.replace(regex, ''); 
-			} else {
-				//Clear the html tags
-				var res = newLine.replace(regex, ''); 
-			}
-			
-			//Clear multiple consecutive dots
-			res = res.replace(/^[\.\s]+/, '');
-			res = res.replace(/(\.\s\.\s)+/g, '');
-			res = res.replace(/\.\./g, '');
-		  
-			//If the data has more characters than the required
-			if(res.length > maxChars) {
-				//Get the data until the last space before the maximum number of characters
-				res = res.substring(0, maxChars);
-				res = res.substring(0, res.lastIndexOf(" ")) + '...';
+			if(cont != '' && maxChars > 0) {
+				//Use regex to get the new lines
+				var nRegex = /<\/div>[\n\r]*<div>/g;
+				var newLine = cont.replace(nRegex, '. ');
+				//Get the position of the hr tag if any
+				var endPos = newLine.search(/(<hr\/>|<hr \/>|<hr>)/);
+				//Regex to eliminate the html tags
+				var regex = /(<([^>]+)>)/ig;
+				
+				//If there is a hr tag
+				if(endPos > 0) {    
+					//Get the data until the hr
+					var intro = newLine.substring(0, endPos);    
+					//Clear the html tags
+					res = intro.replace(regex, ''); 
+				} else {
+					//Clear the html tags
+					res = newLine.replace(regex, ''); 
+				}
+				
+				//Clear multiple consecutive dots
+				res = res.replace(/^[\.\s]+/, '');
+				res = res.replace(/(\.\s\.\s)+/g, '');
+				res = res.replace(/\.\./g, '');
+			  
+				//If the data has more characters than the required
+				if(res.length > maxChars) {
+					//Get the data until the last space before the maximum number of characters
+					res = res.substring(0, maxChars);
+					res = res.substring(0, res.lastIndexOf(" ")) + '...';
+				}
 			}
 			
 			//Return the intro text
