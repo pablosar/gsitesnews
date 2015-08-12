@@ -452,12 +452,17 @@
 		  
 			if(img1 != null) {
 				// Use regexp to get the source of the previously retrieved image tag
-				var srcRegexp = /src=\S+[^>]/;
+				var srcRegexp = /src=(\S+[^>])/;
 				// Re-make the image tag to assure empty style
 				//var imgSrc = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' alt="' + title + '" title="' + title + '" style="width:'+imgSize+'px;height:'+imgSize+'px;"/></div>';
 				// Get the image source
-				var imgSrc = srcRegexp.exec(img1);
-				imgSrc = imgSrc.replace(/src=/i, '');
+				var imgSrc = srcRegexp.exec(img1);				
+				//var imgSrc = imgSrc[0].replace(/src=/i, '');
+				if(typeof imgSrc[1] != 'undefined') {
+					imgSrc = imgSrc[1];
+				} else {
+					imgSrc = '';
+				}
 				
 				// Return the image source
 				return imgSrc;
