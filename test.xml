@@ -293,9 +293,12 @@
 				//Put the image
 				if(imgSrc != '') {
 					var img = imgTemplate.replace(/#_IMAGE/, imgSrc);
+					img = img.replace(/#_TITLE/g, getIntro(feed.Entry[i].Title));
 					slide = slide.replace(/#_IMAGE/, img);
+				} else {
+					slide = slide.replace(/#_IMAGE/, '');
 				}
-									
+				
 				sliderObj.innerHTML += slide;
 				idxObj.innerHTML += '<div id="idx' + idStr + '" onclick="goSlide(' + idStr + ', true)" title="' + feed.Entry[i].Title + '">&nbsp;</div>';
 			}
@@ -452,7 +455,8 @@
 		  
 			if(img1 != null) {
 				// Use regexp to get the source of the previously retrieved image tag
-				var srcRegexp = /src=(\S+[^>])/;
+				//var srcRegexp = /src=(\S+[^>])/;
+				var srcRegexp = /src=[\"\']+([^\"^\']+)/;
 				// Re-make the image tag to assure empty style
 				//var imgSrc = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' alt="' + title + '" title="' + title + '" style="width:'+imgSize+'px;height:'+imgSize+'px;"/></div>';
 				// Get the image source
