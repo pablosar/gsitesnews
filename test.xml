@@ -283,17 +283,17 @@
 				//Put the id to the slide
 				var slide = template.replace(/#_ID/g, idStr);
 				//Add the z-index
-				slide += slide.replace(/#_ZINDEX/g, (feed.Entry.length - i).toString());
+				slide = slide.replace(/#_ZINDEX/g, (feed.Entry.length - i).toString());
 				//Put the link in the slide				
-				slide += slide.replace(/#_LINK/g, feed.Entry[i].Link);
+				slide = slide.replace(/#_LINK/g, feed.Entry[i].Link);
 				//Put the title in the slide
-				slide += slide.replace(/#_TITLE/g, feed.Entry[i].Title);
+				slide = slide.replace(/#_TITLE/g, feed.Entry[i].Title);
 				//Put the text in the slide
-				slide += slide.replace(/#_TEXT/g, getIntro(feed.Entry[i].Summary));
+				slide = slide.replace(/#_TEXT/g, getIntro(feed.Entry[i].Summary));
 				//Put the image
 				if(imgSrc != '') {
 					var img = imgTemplate.replace(/#_IMAGE/, imgSrc);
-					slide += slide.replace(/#_IMAGE/, img);
+					slide = slide.replace(/#_IMAGE/, img);
 				}
 									
 				sliderObj.innerHTML += slide;
