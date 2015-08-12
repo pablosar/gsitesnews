@@ -10,7 +10,8 @@
   <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="3"/>
   <UserPref name="max_chars" display_name="Maximum Characters to Show" required="true" default_value="100"/>
-  <UserPref name="img_size" display_name="Picture Preview Size" required="true" default_value="100"/>
+  <UserPref name="img_cover" display_name="Use Picture as Cover" datatype="bool" default_value="false"/>
+  <UserPref name="img_size" display_name="Picture Preview Size" required="true" default_value="100"/>  
   <UserPref name="aa_height" display_name="Auto-adjust height" datatype="bool" default_value="false"/>
   <UserPref name="no_cache" display_name="Cache Size (in seconds)" required="true" default_value="60"/>
    <Content type="html"><![CDATA[<html>
@@ -177,6 +178,8 @@
 		var aaHeight = false;
 		//The number of items to show
 		var itemNum = 3;
+		//Use the first image as a cover for the slide
+		var imgCover = false;
 		
 		function getHtml() {
 			//Get the user preferences
@@ -193,6 +196,7 @@
 			customCss = prefs.getString("custom_css");
 			itemNum = prefs.getInt("item_num");
 			aaHeight = prefs.getBool("aa_height");
+			imgCover = prefs.getBool("img_cover");
 		  
 			//Append the custom css to the html
 			if(customCss != '') {
@@ -255,14 +259,44 @@
 			//Set the maximum number of slideshow
 			window.itemNum = feed.Entry.length;
 			
+			//Template for the slide					
+			if(imgCover == true){
+				//Use the image as cover (on the background)
+				var template = '<div id="slide#_ID" style="z-index:#_ZINDEX;#_IMAGE" class="slide"><div class="innerSlide">';
+				template += '<h3><a href="#_LINK" target="_top" title="Read more about #_TITLE">#_TITLE</a></h3>';				
+				template += '<p>#_TEXT</p></div></div>';
+				
+				var imgTemplate = background: url(#_IMAGE) no-repeat center center; background-size: cover;
+			} else {
+				var template = '<div id="slide#_ID" style="z-index:#_ZINDEX;" class="slide"><div class="innerSlide">';
+				template += '<h3><a href="#_LINK" target="_top" title="Read more about #_TITLE">#_TITLE</a></h3>';
+				template += '#_IMAGE';
+				template += '<p>#_TEXT</p></div></div>';
+				
+				var imgTemplate = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;background: url(#_IMAGE) no-repeat center center; background-size: cover;" class="thumbnail" title="#_TITLE"></div>';
+			}	
+						
 			//Put the data into the slider
 			for(var i = 0; i < feed.Entry.length; i++) {
-				var idStr = (i + 1).toString();
-				var slide = '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
-				slide += getImg(feed.Entry[i].Summary, feed.Entry[i].Title) + '<p>' + getIntro(feed.Entry[i].Summary) + '</p>';
-				
-					
-				sliderObj.innerHTML += '<div id="slide' + idStr + '" style="z-index:' + (feed.Entry.length - i).toString() + ';" class="slide"><div class="innerSlide">' + slide + '</div></div>';
+				var idStr = (i + 1).toString();		
+				var imgSrc = getImg(feed.Entry[i].Summary);
+				//Put the id to the slide
+				var slide = template.replace(/#_ID/g, idStr);
+				//Add the z-index
+				slide += slide.replace(/#_ZINDEX/g, (feed.Entry.length - i).toString());
+				//Put the link in the slide				
+				slide += slide.replace(/#_LINK/g, feed.Entry[i].Link);
+				//Put the title in the slide
+				slide += slide.replace(/#_TITLE/g, feed.Entry[i].Title);
+				//Put the text in the slide
+				slide += slide.replace(/#_TEXT/g, getIntro(feed.Entry[i].Summary));
+				//Put the image
+				if(imgSrc != '') {
+					var img = imgTemplate.replace(/#_IMAGE/, imgSrc);
+					slide += slide.replace(/#_IMAGE/, img);
+				}
+									
+				sliderObj.innerHTML += slide;
 				idxObj.innerHTML += '<div id="idx' + idStr + '" onclick="goSlide(' + idStr + ', true)" title="' + feed.Entry[i].Title + '">&nbsp;</div>';
 			}
 			
@@ -410,7 +444,7 @@
 			return res;
 		}
 		
-		function getImg(cont, title) {
+		function getImg(cont) {
 			// Retrieve the first image source from the content of the page
 			// Use regexp to get the first image tag
 			var imgRegexp = /<img.*?\/>/;
@@ -420,10 +454,13 @@
 				// Use regexp to get the source of the previously retrieved image tag
 				var srcRegexp = /src=\S+[^>]/;
 				// Re-make the image tag to assure empty style
-				var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' alt="' + title + '" title="' + title + '" width="'+imgSize+'px" height="auto"/></div>';
-			  
-				// Return the image
-				return imgPrev;
+				//var imgSrc = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + srcRegexp.exec(img1) + ' alt="' + title + '" title="' + title + '" style="width:'+imgSize+'px;height:'+imgSize+'px;"/></div>';
+				// Get the image source
+				var imgSrc = srcRegexp.exec(img1);
+				imgSrc = imgSrc.replace(/src=/i, '');
+				
+				// Return the image source
+				return imgSrc;
 			} else {
 				return '';
 			}
