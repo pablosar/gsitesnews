@@ -54,10 +54,10 @@
 	<body>
 		<h1 style="display:none;">Website Title</h1>
 		<div id="ctrls">
-			<div class="button" onclick="zoomIt(1)" style="font-size:18pt;">A</div>
-			<div class="button" onclick="zoomIt(-1)" style="font-size:14pt;">A</div>		
+			<div class="button" onclick="zoomIt(-1)" style="font-size:14pt;">-A</div>
+			<div class="button" onclick="zoomIt(1)" style="font-size:18pt;">+A</div>					
 		</div>
-		<iframe id="siteFrame" src="https://sites.google.com/a/edu.haifa.ac.il/pablo"></iframe>
+		<iframe id="siteFrame" src="http://sites.google.com/a/edu.haifa.ac.il/pablo"></iframe>
 	</body>
 </html>]]>
   </Content>
