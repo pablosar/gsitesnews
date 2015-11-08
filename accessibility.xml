@@ -17,14 +17,13 @@
 				-ms-transform: scale(1); 
 				-ms-transform-origin: 0 0;
 			}
-			.button {
-				font-size: 20pt;
+			.button {				
 				background-color: #f0f0f0;
 				font-weight: bold;
 				border:2px solid blue;
 				padding: 5px;
-				width: 50px;
-				height: 50px;
+				width: 25px;
+				height: 25px;
 				text-align: center;
 				display: table-cell;
 				cursor:pointer;
@@ -45,17 +44,18 @@
 				var zIdx = zoomIndex + (z * 0.5);
 				if (zIdx >= 0.5 && zIdx < 6) {
 					//parent.document.body.style.transform = 'scale('+zIdx.toString()+')';
-					document.getElementById('siteFrame').style.transform = 'scale('+zIdx.toString()+')';
+					document.getElementById('siteFrame').contentDocument.body.style.transform = 'scale('+zIdx.toString()+')';
 					zoomIndex = zIdx;
 				}
 				//document.body.style.webkitTransform = 'scale('+z.toString()+')';
 			}
 		</script>
 	</head>
-	<body>		
+	<body>
+		<h1 style="display:none;">Website Title</h1>
 		<div id="ctrls">
-			<div class="button" onclick="zoomIt(1)">+</div>
-			<div class="button" onclick="zoomIt(-1)">-</div>		
+			<div class="button" onclick="zoomIt(1)" style="font-size:18pt;">A</div>
+			<div class="button" onclick="zoomIt(-1)" style="font-size:14pt;">A</div>		
 		</div>
 		<iframe id="siteFrame" src="https://sites.google.com/a/edu.haifa.ac.il/pablo"></iframe>
 	</body>
