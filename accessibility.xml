@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Accessibility for Google Sites"     
+    scrolling="true">
+  </ModulePrefs> 
+   <Content type="html"><![CDATA[<html>
+	<head>			
+		<style>	
+			.button {
+				font-size: 20pt;
+				background-color: #f0f0f0;
+				font-weight: bold;
+				border:2px solid blue;
+				padding: 5px;
+				width: 50px;
+				height: 50px;
+				text-align: center;
+				display: table-cell;
+				cursor:pointer;
+			}
+		</style>
+		<script type="text/javascript">
+			var zoomIndex = 1;
+			
+			function zoomIt(z) {
+				var zIdx = zoomIndex + (z * 0.5);
+				if (zIdx >= 0.5 && zIdx < 6) {
+					parent.document.body.style.transform = 'scale('+zIdx.toString()+')';
+					//document.getElementById('ctrls').style.transform = 'scale(1)';
+					zoomIndex = zIdx;
+				}
+				//document.body.style.webkitTransform = 'scale('+z.toString()+')';
+			}
+		</script>
+	</head>
+	<body>
+		<div id="ctrls">
+			<div class="button" onclick="zoomIt(1)">+</div>
+			<div class="button" onclick="zoomIt(-1)">-</div>		
+		</div>
+	</body>
+</html>]]>
+  </Content>
+</Module>
