@@ -25,19 +25,20 @@
 			function zoomIt(z) {
 				var zIdx = zoomIndex + (z * 0.5);
 				if (zIdx >= 0.5 && zIdx < 6) {
-					parent.document.body.style.transform = 'scale('+zIdx.toString()+')';
-					//document.getElementById('ctrls').style.transform = 'scale(1)';
+					//parent.document.body.style.transform = 'scale('+zIdx.toString()+')';
+					document.getElementById('siteFrame').style.transform = 'scale('+zIdx.toString()+')';
 					zoomIndex = zIdx;
 				}
 				//document.body.style.webkitTransform = 'scale('+z.toString()+')';
 			}
 		</script>
 	</head>
-	<body>
+	<body>		
 		<div id="ctrls">
 			<div class="button" onclick="zoomIt(1)">+</div>
 			<div class="button" onclick="zoomIt(-1)">-</div>		
 		</div>
+		<iframe id="siteFrame" src="https://sites.google.com/a/edu.haifa.ac.il/pablo"></iframe>
 	</body>
 </html>]]>
   </Content>
