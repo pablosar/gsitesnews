@@ -96,7 +96,7 @@
 				}
 				
 				//Add the title of the website inside an h1 tag
-				var titleObj = document.getElementById("siteName");
+				var titleObj = document.getElementById("siteTitle");
 				titleObj.innerHTML = '<h1>'+title+'</h1>';	
 				
 				//If the user asked not to show the title set its display to none
