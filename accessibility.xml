@@ -3,10 +3,22 @@
   <ModulePrefs title="Accessibility for Google Sites"     
     scrolling="true">
   </ModulePrefs> 
+  <UserPref name="site_url" display_name="The URL of the website" required="true"/>
+  <UserPref name="site_title" display_name="The title of the website" required="true"/>
+  <UserPref name="show_title" display_name="Show title" datatype="bool" default_value="false"/>  
    <Content type="html"><![CDATA[<html lang="en-us">
 	<head>			
 		<style>	
-			body {
+			#wrapper {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			overflow: hidden;
+			}
+			#siteFrame {
+				border: none;
+				width: 100%;
+				height: 100%;
 				transform: scale(1); 
 				-webkit-transform: scale(1); 
 				-webkit-transform-origin: 0 0; 
@@ -28,37 +40,78 @@
 				display: table-cell;
 				cursor:pointer;
 			}
-			#siteFrame {
-				-webkit-transform-origin: 0 0; 
-				-moz-transform-origin: 0 0; 
-				-o-transform-origin: 0 0; 
-				-ms-transform-origin: 0 0;
-				width: 100%;
-				height: 100%;
-			}
 		</style>
 		<script type="text/javascript">
+			//Keep track of the zoom value
 			var zoomIndex = 1;
 			
 			function zoomIt(z) {
-				var zIdx = zoomIndex + (z * 0.5);
+				//Get the iframe object
+				var obj = document.getElementById('siteFrame');
+				//Recalculate the zoom value
+				var zIdx = zoomIndex + z;
+				
+				//Keep the zoom index within a given range
 				if (zIdx >= 0.5 && zIdx < 6) {
-					//parent.document.body.style.transform = 'scale('+zIdx.toString()+')';
-					document.getElementById('siteFrame').contentDocument.body.style.transform = 'scale('+zIdx.toString()+')';
+					//Recalculate the size of the frame so it keeps its size
+					var frmSize = 100 / zIdx;
+					
+					//Scale the iframe and its content
+					obj.style.transform = 'scale('+zIdx.toString()+')';
+					//Re-scale the size of the iframe so it keeps its original size
+					obj.style.width = frmSize.toString() + '%';
+					obj.style.height = frmSize.toString() + '%';
+					
+					//Keep track of the current zoom value
 					zoomIndex = zIdx;
-				}
-				//document.body.style.webkitTransform = 'scale('+z.toString()+')';
+				}				
 			}
 		</script>
 	</head>
 	<body>
-		<h1 style="display:none;">Website Title</h1>
+		<div id="siteTitle">Website</div>
 		<div id="ctrls">
 			<div class="button" onclick="zoomIt(-1)" style="font-size:14pt;">-A</div>
 			<div class="button" onclick="zoomIt(1)" style="font-size:18pt;">+A</div>					
 		</div>
-		<iframe id="siteFrame" src="http://sites.google.com/a/edu.haifa.ac.il/pablo"></iframe>
+		<div id="wrapper">
+			<iframe id="siteFrame" src=""></iframe>
+		</div>
 	</body>
+	<script type="text/javascript">
+		function getHTML() {
+			//Get the user preferences
+			var prefs = new gadgets.Prefs();
+			//The url to retrieve the url of the website
+			var url = prefs.getString("site_url");
+			var title = prefs.getString("site_title");
+			var showTitle = prefs.getBool("show_title");
+			
+			//Continue if the url is not empty
+			if(url != '') {
+				//If the title for the website was not given
+				if(title == '') {
+					//Give it a title
+					title = 'Website';
+				}
+				
+				//Add the title of the website inside an h1 tag
+				var titleObj = document.getElementById("siteName");
+				titleObj.innerHTML = '<h1>'+title+'</h1>';	
+				
+				//If the user asked not to show the title set its display to none
+				if(!showTitle) {
+					titleObj.style.display = 'none';
+				}
+				
+				//Set the url of the website in the iframe
+				var urlObj = document.getElementById("siteFrame");
+				urlObj.src = url;
+			}			
+		}
+		//Register the function to google gadgets
+		gadgets.util.registerOnLoadHandler(getHTML);
+	</script>	
 </html>]]>
   </Content>
 </Module>
