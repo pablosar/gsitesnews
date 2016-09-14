@@ -257,13 +257,14 @@
 			//Adjust the slider size according to the user preferences
 			if(slideWidth == "" || slideWidth == 0) {
 				//Adjust the width to 100%
-				document.getElementById('slideshow').style.width = "99%";
+				document.getElementById('slideshow').style.width = "99%";				
 			} else {
 				//Adjust the width to the selected pixels
-				document.getElementById('slideshow').style.width = slideWidth;					
+				document.getElementById('slideshow').style.width = slideWidth + 5;					
+				//Adjust the width of the inner part of the slider
+				document.getElementById('slider_inner').style.width = slideWidth;				
 			}
-			//Adjust the width of the inner part of the slider
-			document.getElementById('slider_inner').style.width = slideWidth;	
+				
 			//Adjust the height to the selected pixels
 			document.getElementById('slideshow').style.height = slideHeight + 27;
 			document.getElementById('slider_inner').style.height = slideHeight;
