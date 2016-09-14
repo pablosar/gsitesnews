@@ -6,7 +6,7 @@
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
   <UserPref name="custom_css" display_name="Custom Stylesheet" default_value="https://sites.google.com/a/edu.haifa.ac.il/ejsafra/default.css"/>  
   <UserPref name="interval" display_name="Transitions length (in milliseconds)" required="true" default_value="5000"/>
-  <UserPref name="width" display_name="Slider Width (leave empty for 100%)" required="false" default_value="350"/>
+  <UserPref name="width" display_name="Slider Width (leave empty for 100%)" required="false" default_value=""/>
   <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="3"/>
   <UserPref name="max_chars" display_name="Maximum Characters to Show" required="true" default_value="100"/>
@@ -101,6 +101,7 @@
 				border-left: 10px solid rgba(255, 255, 255, 0.95);
 			}
 			#prev:hover, #next:hover {
+				display: inline-block;
 				margin-top: -1px;
 				box-shadow: 1px 1px 3px #000000;
 			}
