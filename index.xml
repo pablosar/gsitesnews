@@ -254,7 +254,7 @@
 			var feed = obj.data;
 			
 			//Adjust the slider size according to the user preferences
-			if(sliderWidth == "100%") {
+			if(slideWidth == "100%") {
 				//Adjust the width to 100%
 				document.getElementById('slideshow').style.width = slideWidth;
 			} else {
