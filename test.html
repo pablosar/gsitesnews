@@ -1,36 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Module>
-  <ModulePrefs title="Google Sites News"     
-    scrolling="true">
-  </ModulePrefs>
-  <UserPref name="rss_url" display_name="RSS URL" required="true"/>
-  <UserPref name="custom_css" display_name="Custom Stylesheet" default_value="https://sites.google.com/a/edu.haifa.ac.il/ejsafra/default.css"/>  
-  <UserPref name="interval" display_name="Transitions length (in milliseconds)" required="true" default_value="5000"/>
-  <UserPref name="width" display_name="Slider Width (leave empty for 100%)" required="false" default_value="350"/>
-  <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
-  <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="3"/>
-  <UserPref name="max_chars" display_name="Maximum Characters to Show" required="true" default_value="100"/>
-  <UserPref name="img_cover" display_name="Use Picture as Cover" datatype="bool" default_value="false"/>
-  <UserPref name="img_size" display_name="Picture Preview Size" required="true" default_value="100"/>  
-  <UserPref name="aa_height" display_name="Auto-adjust height" datatype="bool" default_value="false"/>
-  <UserPref name="no_cache" display_name="Cache Size (in seconds)" required="true" default_value="60"/>
-   <Content type="html"><![CDATA[<html>
-	<head>			
+<head>			
 		<style>
 			#slideshow {
 				position: relative; 
 				overflow: hidden;
 				width: 100%;
-				height: 134px;
+				height: 200px;
 			}
 			#slider_inner {
 				position: relative;
 				overflow: hidden;
+				width: 100%;
 				height: 100px;
-				left: 0px;
-			}
-			#slider_inner:hover ~ #prev, #slider_inner:hover ~ #next {
-				display: inline-block;
+				left: 30px;
 			}
 			.slide {
 				position: absolute;
@@ -63,12 +44,6 @@
 			#prev {				
 				left: 5px;
 				border-radius: 3px 0px 0px 3px;
-				background: #000000; /* For browsers that do not support gradients */
-				background: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.25)); /* For Safari 5.1 to 6.0 */
-				background: -o-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,0.25)); /* For Opera 11.1 to 12.0 */
-				background: -moz-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,0.25)); /* For Firefox 3.6 to 15 */
-				background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.25)); /* Standard syntax */			
-				z-index: 999997;
 			}
 			#prev span {
 				display: inline-block;
@@ -83,12 +58,6 @@
 			#next {				
 				right: 5px;
 				border-radius: 0px 3px 3px 0px;
-				background: #000000; /* For browsers that do not support gradients */
-				background: -webkit-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,0.25)); /* For Safari 5.1 to 6.0 */
-				background: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.25)); /* For Opera 11.1 to 12.0 */
-				background: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.25)); /* For Firefox 3.6 to 15 */
-				background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,0.25)); /* Standard syntax */
-				z-index: 999998;
 			}
 			#next span {
 				display: inline-block;
@@ -269,7 +238,7 @@
 			//Adjust the position of the previous and next buttons
 			document.getElementById('next').style.top = (slideHeight-30)/2;
 			document.getElementById('prev').style.top = (slideHeight-30)/2;	
-			
+				
 			//Get the element where to put the data
 			var sliderObj = document.getElementById('slider_inner');
 			//Get the element where to put the pagination indexes (the links to each slide)
@@ -503,6 +472,4 @@
 		
 		gadgets.util.registerOnLoadHandler(getHtml);
 	</script>
-</html>]]>
-  </Content>
-</Module>
+</html>
