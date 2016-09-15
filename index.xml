@@ -7,7 +7,7 @@
   <UserPref name="custom_css" display_name="Custom Stylesheet" default_value="https://sites.google.com/a/edu.haifa.ac.il/ejsafra/default.css"/>  
   <UserPref name="interval" display_name="Transitions length (in milliseconds)" required="true" default_value="5000"/>
   <UserPref name="width" display_name="Slider Width (leave empty for 100%)" required="false" default_value=""/>
-  <UserPref name="height" display_name="Slider Height" required="true" default_value="200"/>
+  <UserPref name="height" display_name="Slider Minimal Height" required="true" default_value="200"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="3"/>
   <UserPref name="max_chars" display_name="Maximum Characters to Show" required="true" default_value="100"/>
   <UserPref name="img_cover" display_name="Use Picture as Cover" datatype="bool" default_value="false"/>
@@ -21,14 +21,14 @@
 				position: relative; 
 				overflow: hidden;
 				width: 100%;
-				height: 134px;
+				min-height: 134px;
 				padding: 5px;
 				box-sizing: border-box;
 			}
 			#slider_inner {
 				position: relative;
 				overflow: hidden;
-				height: 100px;
+				min-height: 100px;
 				box-sizing: border-box;
 			}
 			#slider_inner:hover ~ #prev, #slider_inner:hover ~ #next {
@@ -268,8 +268,8 @@
 			}
 				
 			//Adjust the height to the selected pixels
-			document.getElementById('slideshow').style.height = slideHeight + 27;
-			document.getElementById('slider_inner').style.height = slideHeight;
+			document.getElementById('slideshow').style.minHeight = slideHeight + 27;
+			document.getElementById('slider_inner').style.minHeight = slideHeight;
 			//Adjust the position of the previous and next buttons
 			document.getElementById('next').style.top = (slideHeight-30)/2;
 			document.getElementById('prev').style.top = (slideHeight-30)/2;	
@@ -331,6 +331,11 @@
 			
 			//Start the slider
 			startSlider();
+			
+			//Auto-adjust the height
+			if(aaHeight) {					
+				gadgets.window.adjustHeight();					
+			}
 		}
 			
 		function startSlider() {
@@ -423,7 +428,7 @@
 				obj.style.fontSize = '18pt';
 				obj.style.width = '30px';
 				obj.style.height = '30px';
-				obj.style.top = '5px';
+				obj.style.top = '10px';
 			}
 		}
 		
