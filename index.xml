@@ -332,7 +332,7 @@
 				if(thisHeight > maxHeight) {
 					maxHeight = thisHeight;
 				}				
-				console.log('Max height: ' + maxHeight);
+				console.log('Max height (clientHeight): ' + maxHeight);
 			}
 			
 			//Adjust the height of the slider and controls
