@@ -329,14 +329,16 @@
 				idxObj.innerHTML += '<div id="idx' + idStr + '" onclick="goSlide(' + idStr + ', true)" title="' + feed.Entry[i].Title + '">&nbsp;</div>';
 			}
 			
-			//Start the slider
-			startSlider();
-			
 			//Auto-adjust the height
 			if(aaHeight) {
 				console.log('Auto-adjusting height: ' + aaHeight);
-				gadgets.window.adjustHeight();					
+				console.log('Slideshow height: ' + document.getElementById('slideshow').height);
+				console.log('IFrame height?: ' + this.height);
+				gadgets.window.adjustHeight(500);					
 			}
+			
+			//Start the slider
+			startSlider();
 		}
 			
 		function startSlider() {
