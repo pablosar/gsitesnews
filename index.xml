@@ -326,7 +326,8 @@
 				sliderObj.innerHTML += slide;
 				idxObj.innerHTML += '<div id="idx' + idStr + '" onclick="goSlide(' + idStr + ', true)" title="' + feed.Entry[i].Title + '">&nbsp;</div>';
 				
-				var thisHeight = document.getElementById('slide' + idStr).offsetHeight;
+				//Calculate the height of each slide and get the maximum one
+				var thisHeight = document.getElementById('slide' + idStr).clientHeight;
 				
 				if(thisHeight > maxHeight) {
 					maxHeight = thisHeight;
