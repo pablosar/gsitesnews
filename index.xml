@@ -302,7 +302,10 @@
 				
 				var imgTemplate = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;background: url(#_IMAGE) no-repeat center center; background-size: cover;" class="thumbnail" title="#_TITLE"></div>';
 			}	
-						
+			
+			//Get the maximum height
+			maxHeight = 0;
+			
 			//Put the data into the slider
 			for(var i = 0; i < feed.Entry.length; i++) {
 				var idStr = (i + 1).toString();		
@@ -328,13 +331,17 @@
 				
 				sliderObj.innerHTML += slide;
 				idxObj.innerHTML += '<div id="idx' + idStr + '" onclick="goSlide(' + idStr + ', true)" title="' + feed.Entry[i].Title + '">&nbsp;</div>';
+				
+				maxHeight += document.getElementById('idx' + idStr).offsetHeight;
+				console.log('Max height: ' + maxHeight);
 			}
 			
 			//Auto-adjust the height
 			if(aaHeight) {
 				console.log('Auto-adjusting height: ' + aaHeight);
-				console.log('Slideshow height: ' + document.getElementById('slideshow').innerHTML);
-				console.log('IFrame height?: ' + this);
+				console.log('Slideshow height: ' + document.getElementById('slideshow').offsetHeight);
+				console.log('IFrame height?: ' + this.clientHeight);
+				console.log('IFrame height?: ' + this.offsetHeight);
 				gadgets.window.adjustHeight();					
 			}
 			
