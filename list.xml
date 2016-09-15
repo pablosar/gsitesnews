@@ -7,7 +7,7 @@
   <UserPref name="rss_url" display_name="RSS URL" required="true"/>
   <UserPref name="bg" display_name="Background Color" required="true" default_value="#f9f9f9"/>
   <UserPref name="item_num" display_name="The number of items to show" required="true" default_value="2"/>
-  <UserPref name="item_height" display_name="Item height" required="true" default_value="120"/>
+  <UserPref name="item_height" display_name="Minimum item height" required="true" default_value="120"/>
   <UserPref name="max_chars" display_name="The maximum number of characters to show (0 to show only the title)" required="true" default_value="100"/>
   <UserPref name="img_size" display_name="Thumbnail picture size" required="true" default_value="100"/>
   <UserPref name="show_more" display_name="Show read more button" datatype="bool" default_value="true"/>
@@ -162,12 +162,12 @@
 			if (feed.Entry) {
 				//Create a CSS object with the background color
 				var css = 'body {background-color: ' + bg + ';}\n';
-				css += '#slider ul li div {padding: 10px; height: '+itemHeight+'px;}\n';
+				css += '#slider ul li div {padding: 10px; min-height: '+itemHeight+'px; height:auto;}\n';
 				appendCSS(css);
 				
 				//Variable to put the slides into
-				var slides = '';		
-				
+				var slides = '';
+								
 				//Loop through the feed entries
 				for(var i=0; i < feed.Entry.length; i++){
 					//The id of the slide
@@ -188,11 +188,10 @@
 					var more = '<div id="more"><a href="' + parentLink + '" target="_top" title="More about">' + readMore + '</a></div>';
 				} else {
 					var more = '';
-				}
-				
+				}				
 				
 				document.getElementById('slider_inner').innerHTML = '<ul>' + slides + '</ul>' + more; 		
-								
+					
 				//Auto-adjust the height
 				if(aaHeight) {					
 					gadgets.window.adjustHeight();					
