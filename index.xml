@@ -23,6 +23,7 @@
 				overflow: hidden;
 				width: 100%;
 				min-height: 134px;
+				height: auto;				
 				padding: 5px;
 				box-sizing: border-box;
 			}
@@ -30,6 +31,7 @@
 				position: relative;
 				overflow: hidden;
 				min-height: 100px;
+				height: auto;
 				box-sizing: border-box;
 			}
 			#slider_inner:hover ~ #prev, #slider_inner:hover ~ #next {
@@ -338,10 +340,6 @@
 			
 			//Auto-adjust the height
 			if(aaHeight) {
-				console.log('Auto-adjusting height: ' + aaHeight);
-				console.log('Slideshow height: ' + document.getElementById('slideshow').offsetHeight);
-				console.log('IFrame height?: ' + this.clientHeight);
-				console.log('IFrame height?: ' + this.offsetHeight);
 				gadgets.window.adjustHeight();					
 			}
 			
@@ -390,12 +388,19 @@
 			document.getElementById('slide' + prev.toString()).style.zIndex = prev;			
 			document.getElementById('idx' + prev.toString()).style.background = '';			
 			document.getElementById('idx' + prev.toString()).style.boxShadow = '';	
+			document.getElementById('idx' + prev.toString()).style.position = 'absolute';
 			
 			//Show the next one
 			document.getElementById('slide' + window.counter.toString()).style.opacity = 1;
 			document.getElementById('slide' + window.counter.toString()).style.zIndex = (window.itemNum + 1);
 			document.getElementById('idx' + window.counter.toString()).style.background = 'rgba(1, 87, 155, 0.65)';				
-			document.getElementById('idx' + window.counter.toString()).style.boxShadow = '0px 0px 3px rgba(1, 87, 155, 0.65)';							
+			document.getElementById('idx' + window.counter.toString()).style.boxShadow = '0px 0px 3px rgba(1, 87, 155, 0.65)';	
+			document.getElementById('idx' + window.counter.toString()).style.position = 'relative';
+			
+			//Auto-adjust the height
+			if(aaHeight) {
+				gadgets.window.adjustHeight();					
+			}
 		}
 		
 		function goSlide(idx, jump) {
