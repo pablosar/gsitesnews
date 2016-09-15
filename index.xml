@@ -333,8 +333,8 @@
 			//Auto-adjust the height
 			if(aaHeight) {
 				console.log('Auto-adjusting height: ' + aaHeight);
-				console.log('Slideshow height: ' + document.getElementById('slideshow').style.height);
-				console.log('IFrame height?: ' + this.style.height);
+				console.log('Slideshow height: ' + document.getElementById('slideshow').innerHTML);
+				console.log('IFrame height?: ' + this);
 				gadgets.window.adjustHeight();					
 			}
 			
