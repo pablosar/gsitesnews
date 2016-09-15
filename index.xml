@@ -333,7 +333,8 @@
 			startSlider();
 			
 			//Auto-adjust the height
-			if(aaHeight) {					
+			if(aaHeight) {
+				console.log('Auto-adjusting height: ' + aaHeight);
 				gadgets.window.adjustHeight();					
 			}
 		}
