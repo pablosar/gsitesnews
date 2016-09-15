@@ -23,12 +23,13 @@
 				width: 100%;
 				height: 134px;
 				padding: 5px;
+				box-sizing: border-box;
 			}
 			#slider_inner {
 				position: relative;
 				overflow: hidden;
 				height: 100px;
-				left: 0px;
+				box-sizing: border-box;
 			}
 			#slider_inner:hover ~ #prev, #slider_inner:hover ~ #next {
 				display: inline-block;
