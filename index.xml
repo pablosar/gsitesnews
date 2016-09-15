@@ -334,7 +334,7 @@
 				sliderObj.innerHTML += slide;
 				idxObj.innerHTML += '<div id="idx' + idStr + '" onclick="goSlide(' + idStr + ', true)" title="' + feed.Entry[i].Title + '">&nbsp;</div>';
 				
-				maxHeight += document.getElementById('idx' + idStr).offsetHeight;
+				maxHeight += document.getElementById('slide' + idStr).offsetHeight;
 				console.log('Max height: ' + maxHeight);
 			}
 			
@@ -388,14 +388,14 @@
 			document.getElementById('slide' + prev.toString()).style.zIndex = prev;			
 			document.getElementById('idx' + prev.toString()).style.background = '';			
 			document.getElementById('idx' + prev.toString()).style.boxShadow = '';	
-			document.getElementById('idx' + prev.toString()).style.position = 'absolute';
+			document.getElementById('slide' + prev.toString()).style.position = 'absolute';
 			
 			//Show the next one
 			document.getElementById('slide' + window.counter.toString()).style.opacity = 1;
 			document.getElementById('slide' + window.counter.toString()).style.zIndex = (window.itemNum + 1);
 			document.getElementById('idx' + window.counter.toString()).style.background = 'rgba(1, 87, 155, 0.65)';				
 			document.getElementById('idx' + window.counter.toString()).style.boxShadow = '0px 0px 3px rgba(1, 87, 155, 0.65)';	
-			document.getElementById('idx' + window.counter.toString()).style.position = 'relative';
+			document.getElementById('slide' + window.counter.toString()).style.position = 'relative';
 			
 			//Auto-adjust the height
 			if(aaHeight) {
