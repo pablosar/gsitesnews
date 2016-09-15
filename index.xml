@@ -269,14 +269,7 @@
 				//Adjust the width of the inner part of the slider
 				document.getElementById('slider_inner').style.width = slideWidth;				
 			}
-				
-			//Adjust the height to the selected pixels
-			document.getElementById('slideshow').style.minHeight = slideHeight + 27;
-			document.getElementById('slider_inner').style.minHeight = slideHeight;
-			//Adjust the position of the previous and next buttons
-			document.getElementById('next').style.top = (slideHeight-30)/2;
-			document.getElementById('prev').style.top = (slideHeight-30)/2;	
-			
+					
 			//Get the element where to put the data
 			var sliderObj = document.getElementById('slider_inner');
 			//Get the element where to put the pagination indexes (the links to each slide)
@@ -306,7 +299,7 @@
 			}	
 			
 			//Get the maximum height
-			maxHeight = 0;
+			maxHeight = slideHeight;
 			
 			//Put the data into the slider
 			for(var i = 0; i < feed.Entry.length; i++) {
@@ -334,11 +327,24 @@
 				sliderObj.innerHTML += slide;
 				idxObj.innerHTML += '<div id="idx' + idStr + '" onclick="goSlide(' + idStr + ', true)" title="' + feed.Entry[i].Title + '">&nbsp;</div>';
 				
-				maxHeight += document.getElementById('slide' + idStr).offsetHeight;
+				var thisHeight = document.getElementById('slide' + idStr).offsetHeight;
+				
+				if(thisHeight > maxHeight) {
+					maxHeight = thisHeight;
+				}				
 				console.log('Max height: ' + maxHeight);
 			}
 			
-			//Auto-adjust the height
+			//Adjust the height of the slider and controls
+			document.getElementById('slideshow').style.minHeight = slideHeight + 27;
+			document.getElementById('slider_inner').style.minHeight = slideHeight;
+			//Set the height of the inner slider to the slide with the maximum height
+			document.getElementById('slider_inner').style.height = maxHeight;
+			//Adjust the position of the previous and next buttons
+			document.getElementById('next').style.top = (maxHeight-30)/2;
+			document.getElementById('prev').style.top = (maxHeight-30)/2;	
+			
+			//Auto-adjust the height of the iframe container
 			if(aaHeight) {
 				gadgets.window.adjustHeight();					
 			}
@@ -388,19 +394,12 @@
 			document.getElementById('slide' + prev.toString()).style.zIndex = prev;			
 			document.getElementById('idx' + prev.toString()).style.background = '';			
 			document.getElementById('idx' + prev.toString()).style.boxShadow = '';	
-			document.getElementById('slide' + prev.toString()).style.position = 'absolute';
 			
 			//Show the next one
 			document.getElementById('slide' + window.counter.toString()).style.opacity = 1;
 			document.getElementById('slide' + window.counter.toString()).style.zIndex = (window.itemNum + 1);
 			document.getElementById('idx' + window.counter.toString()).style.background = 'rgba(1, 87, 155, 0.65)';				
 			document.getElementById('idx' + window.counter.toString()).style.boxShadow = '0px 0px 3px rgba(1, 87, 155, 0.65)';	
-			document.getElementById('slide' + window.counter.toString()).style.position = 'relative';
-			
-			//Auto-adjust the height
-			if(aaHeight) {
-				gadgets.window.adjustHeight();					
-			}
 		}
 		
 		function goSlide(idx, jump) {
