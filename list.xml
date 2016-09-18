@@ -62,7 +62,7 @@
 				border: 1px solid rgb(202,202,202);
 				border-bottom: 2px solid rgb(202,202,202);
 			}
-			#slide {
+			.slide {
 				padding: 10px;
 				box-sizing: border-box;
 				display: table;
