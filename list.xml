@@ -62,12 +62,30 @@
 				border: 1px solid rgb(202,202,202);
 				border-bottom: 2px solid rgb(202,202,202);
 			}
+			#slide {
+				padding: 10px;
+				box-sizing: border-box;
+				display: table;
+			}
+			.tableRow {
+				display: table-row;
+			}
+			.tableCell {
+				display: table-cell;
+				vertical-align: center;
+			}
 			.imgPreview {
 				position: absolute;
 				left: 50%;
 				top: 50%;			
-				width: 100%;
+				width: 95%;
 				height: auto;
+				border: 2px solid white;
+				outline-top: 1px solid #cacaca;
+				outline-left: 1px solid #cacaca;
+				outline-right: 1px solid #cacaca;
+				outline-bottom: 2px solid #cacaca;
+				box-sizing: border-box
 				-webkit-transform: translate(-50%,-50%);
 				-ms-transform: translate(-50%,-50%);
 				-o-transform: translate(-50%,-50%);
@@ -77,9 +95,9 @@
 				position: relative;
 				overflow: hidden;
 				float: left;
-				padding: 2px;
-				border: 1px solid #cacaca;
-				border-bottom: 2px solid #cacaca;
+				/*padding: 2px;*/
+				/*border: 1px solid #cacaca;*/
+				/*border-bottom: 2px solid #cacaca;*/
 				margin-right: 10px;
 			}
 			#more {
@@ -162,7 +180,7 @@
 			if (feed.Entry) {
 				//Create a CSS object with the background color
 				var css = 'body {background-color: ' + bg + ';}\n';
-				css += '#slider ul li div {padding: 10px; min-height: '+itemHeight+'px; height:auto;}\n';
+				css += '#slide {padding: 10px; min-height: '+itemHeight+'px; height:auto;}\n';
 				appendCSS(css);
 				
 				//Variable to put the slides into
@@ -174,12 +192,12 @@
 					var id = (i+1).toString();
 					
 					//Create a slide with the feed contents
-					var slide = getImg(feed.Entry[i].Summary, feed.Entry[i].Title) + '<h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
+					var slide = '<div class="tableCell">' + getImg(feed.Entry[i].Summary, feed.Entry[i].Title) + '</div><div class="tableCell"><h3><a href="' + feed.Entry[i].Link + '" target="_top" title="Read more about ' + feed.Entry[i].Title + '">' + feed.Entry[i].Title + '</a></h3>';
 					//Show the image and the intro text only if the number of characters to show is greater than 0
 					if(maxChars > 0) {
 						slide += '<p>' + getIntro(feed.Entry[i].Summary) + '</p>';
 					}						
-					slides += '<li><div id="slide' + id + '">' + slide + '</div></li>';					
+					slides += '<li><div id="slide' + id + '" class="slide"><div class="tableRow">' + slide + '</div></div></div></li>';					
 				}
 				var parentLink = feed.Entry[0].Link;
 				parentLink = parentLink.substring(0, parentLink.lastIndexOf("/"));
@@ -252,7 +270,7 @@
 			  var srcRegexp = /src=\S+[^>]/;
 			  var res = srcRegexp.exec(img1);
 			  // Re-make the image tag to assure empty style
-			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img ' + res.toString() + ' class="imgPreview" alt="' + title + '" title="' + title + '"/></div>';
+			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img ' + res.toString() + ' class="imgPreview" alt="' + title + '" title="' + title + '" width="' + imgSize + 'px"/></div>';
 			  
 			  // Return the image
 			  return imgPrev;
@@ -276,7 +294,7 @@
 		  
 		  if(res != null && res.length > 1) {
 		  	//Convert the results to string
-			var tag = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" alt="' + title + '" title="' + title + '"/></div>';
+			var tag = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" alt="' + title + '" title="' + title + '" width="' + imgSize + 'px"/></div>';
 			//Extract the id of the video
 			//var vid = res.replace('www.youtube.com/embed/', '');
 			var vid = res[1].toString();
