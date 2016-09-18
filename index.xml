@@ -291,12 +291,12 @@
 				
 				var imgTemplate = 'background: url(#_IMAGE) no-repeat center center; background-size: cover';
 			} else {
-				var template = '<div id="slide#_ID" style="z-index:#_ZINDEX;" class="slide"><div class="innerSlide">';
-				template += '<div class="slideTitle"><h3><a href="#_LINK" target="_top" title="Read more about #_TITLE">#_TITLE</a></h3></div>';				
-				template += '#_IMAGE';
-				template += '<div class="slideText"><p>#_TEXT</p></div></div></div>';
+				var template = '<div id="slide#_ID" style="z-index:#_ZINDEX;" class="slide"><div class="innerSlide" style="display:table">';
+				template += '<div style="display:table-row;"><div class="slideTitle" style="display:table-cell;vertical-align:middle;"><h3><a href="#_LINK" target="_top" title="Read more about #_TITLE">#_TITLE</a></h3></div></div>';				
+				template += '<div style="display:table-row;">#_IMAGE';
+				template += '<div class="slideText" style="display:table-cell;vertical-align:middle;"><p>#_TEXT</p></div></div></div></div>';
 				
-				var imgTemplate = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;background: url(#_IMAGE) no-repeat center center; background-size: cover;" class="thumbnail" title="#_TITLE"></div>';
+				var imgTemplate = '<div style="display:table-cell;vertical-align:middle;"><div style="width:'+imgSize+'px;height:'+imgSize+'px;background: url(#_IMAGE) no-repeat center center; background-size: cover;" class="thumbnail" title="#_TITLE"></div></div>';
 			}	
 			
 			//Get the maximum height
