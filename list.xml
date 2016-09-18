@@ -72,7 +72,7 @@
 			}
 			.tableCell {
 				display: table-cell;
-				vertical-align: center;
+				vertical-align: middle;
 			}
 			.imgPreview {
 				position: absolute;
