@@ -80,12 +80,12 @@
 				top: 50%;			
 				width: 95%;
 				height: auto;
-				border: 2px solid white;
-				outline-top: 1px solid #cacaca;
-				outline-left: 1px solid #cacaca;
-				outline-right: 1px solid #cacaca;
-				outline-bottom: 2px solid #cacaca;
-				box-sizing: border-box
+				border-top: 1px solid #cacaca;
+				border-left: 1px solid #cacaca;
+				border-right: 1px solid #cacaca;
+				border-bottom: 2px solid #cacaca;
+				padding: 2px;
+				box-sizing: border-box;
 				-webkit-transform: translate(-50%,-50%);
 				-ms-transform: translate(-50%,-50%);
 				-o-transform: translate(-50%,-50%);
@@ -270,7 +270,7 @@
 			  var srcRegexp = /src=\S+[^>]/;
 			  var res = srcRegexp.exec(img1);
 			  // Re-make the image tag to assure empty style
-			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img ' + res.toString() + ' class="imgPreview" alt="' + title + '" title="' + title + '" width="' + imgSize + 'px"/></div>';
+			  var imgPrev = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img ' + res.toString() + ' class="imgPreview" alt="' + title + '" title="' + title + '" width="' + imgSize + 'px"/></div>';
 			  
 			  // Return the image
 			  return imgPrev;
@@ -294,7 +294,7 @@
 		  
 		  if(res != null && res.length > 1) {
 		  	//Convert the results to string
-			var tag = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;margin-top:'+(itemHeight-20-imgSize)/2+'px;" class="thumbnail"><img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" alt="' + title + '" title="' + title + '" width="' + imgSize + 'px"/></div>';
+			var tag = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;" class="thumbnail"><img src="https://img.youtube.com/vi/###/hqdefault.jpg" class="imgPreview" alt="' + title + '" title="' + title + '" width="' + imgSize + 'px"/></div>';
 			//Extract the id of the video
 			//var vid = res.replace('www.youtube.com/embed/', '');
 			var vid = res[1].toString();
