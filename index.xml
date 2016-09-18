@@ -332,6 +332,10 @@
 				if(thisHeight > maxHeight) {
 					maxHeight = thisHeight;
 				}				
+				
+				console.log('This height '+idStr+':' + thisHeight);
+				console.log('This scroll height '+idStr+':' +  document.getElementById('slide' + idStr).scrollHeight);
+				console.log('This offset height '+idStr+':' +  document.getElementById('slide' + idStr).offsetHeight);
 				console.log('Max height (clientHeight): ' + maxHeight);
 			}
 			
