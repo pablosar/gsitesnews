@@ -294,7 +294,7 @@
 				var template = '<div id="slide#_ID" style="z-index:#_ZINDEX;" class="slide"><div class="innerSlide"><table width="100%">';
 				template += '<tr><td colspan="2"><div class="slideTitle"><h3><a href="#_LINK" target="_top" title="Read more about #_TITLE">#_TITLE</a></h3></div></td></tr>';				
 				template += '<tr><td style="width:1%;white-space:no-wrap;">#_IMAGE</td>';
-				template += '<td><div class="slideText"><p>#_TEXT</p></div></td></div></div>';
+				template += '<td><div class="slideText"><p>#_TEXT</p></div></td></tr></table></div></div>';
 				
 				var imgTemplate = '<div style="width:'+imgSize+'px;height:'+imgSize+'px;background: url(#_IMAGE) no-repeat center center; background-size: cover;" class="thumbnail" title="#_TITLE"></div>';
 			}	
