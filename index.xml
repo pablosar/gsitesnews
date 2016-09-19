@@ -446,8 +446,8 @@
 			//Get the playback element (the pause icon)
 			var obj = document.getElementById('playback');
 			
-			//If the boolean value is true
-			if(bool==true) {
+			//If the boolean value is true and the slider has no focus
+			if(bool==true && document.activeElement != sliderObj) {
 				//Play the slider (reset the interval) and hide the pause icon
 				window.timer = setInterval(playSlide, window.interval);	
 				obj.style.opacity = 0;
@@ -456,7 +456,7 @@
 				obj.style.width = '';
 				obj.style.height = '';					
 				obj.style.top = '';					
-			} else if(document.activeElement != slideObj) {
+			} else {
 				//Pause the slider (clear the interval) and show the pause icon
 				window.clearInterval(window.timer);					
 				obj.style.opacity = 1;
