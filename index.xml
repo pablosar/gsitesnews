@@ -411,7 +411,7 @@
 		function goSlideKey(evt) {			
 			//Go to a slide by pressing the keyboard			
 			//Get the keycode
-			var k = (evt.which) ? evt.which ? evt.keyCode;
+			var k = (evt.which) ? evt.which : evt.keyCode;
 			if(k == 39) {				
 				//If the right arrow key was pressed go forward
 				goSlide(1);				
