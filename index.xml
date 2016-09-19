@@ -441,6 +441,8 @@
 		
 		function playback(bool) {
 			//Function to pause/play the slider
+			//Get the slider to check the focus for keypress
+			var sliderObj = document.getElementById('slideshow');
 			//Get the playback element (the pause icon)
 			var obj = document.getElementById('playback');
 			
@@ -454,7 +456,7 @@
 				obj.style.width = '';
 				obj.style.height = '';					
 				obj.style.top = '';					
-			} else {
+			} else if(document.activeElement != slideObj) {
 				//Pause the slider (clear the interval) and show the pause icon
 				window.clearInterval(window.timer);					
 				obj.style.opacity = 1;
