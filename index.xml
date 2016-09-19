@@ -164,7 +164,7 @@
 		</style>
 	</head>
 	<body>
-		<div id="slideshow">
+		<div id="slideshow" tabindex="1" onkeydown="goSlideKey(event);" onfocus="playback(false);" onfocusout="playback(true);">
 			<div id="slider">
 				<div id="playback" onmouseover="playback(false);" onmouseout="playback(true);" title="Paused">
 					<span></span><span></span>
@@ -335,10 +335,10 @@
 					maxHeight = thisHeight;
 				}				
 				
-				console.log('This height '+idStr+':' + thisHeight);
-				/*console.log('This scroll height '+idStr+':' +  document.getElementById('slide' + idStr).scrollHeight);
-				console.log('This offset height '+idStr+':' +  document.getElementById('slide' + idStr).offsetHeight);*/
-				console.log('Max height (clientHeight): ' + maxHeight);
+				/*console.log('This height '+idStr+':' + thisHeight);
+				console.log('This scroll height '+idStr+':' +  document.getElementById('slide' + idStr).scrollHeight);
+				console.log('This offset height '+idStr+':' +  document.getElementById('slide' + idStr).offsetHeight);
+				console.log('Max height (clientHeight): ' + maxHeight);*/
 			}
 			
 			//Adjust the height of the slider and controls
@@ -406,6 +406,19 @@
 			document.getElementById('slide' + window.counter.toString()).style.zIndex = (window.itemNum + 1);
 			document.getElementById('idx' + window.counter.toString()).style.background = 'rgba(1, 87, 155, 0.65)';				
 			document.getElementById('idx' + window.counter.toString()).style.boxShadow = '0px 0px 3px rgba(1, 87, 155, 0.65)';	
+		}
+		
+		function goSlideKey(evt) {			
+			//Go to a slide by pressing the keyboard			
+			//Get the keycode
+			var k = (evt.which) ? evt.which ? evt.keyCode;
+			if(k == 39) {				
+				//If the right arrow key was pressed go forward
+				goSlide(1);				
+			} else if(k == 37) {				
+				//If the left arrow key was pressed go backward
+				goSlide(-1);
+			}
 		}
 		
 		function goSlide(idx, jump) {
