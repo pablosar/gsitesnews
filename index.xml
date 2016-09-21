@@ -164,7 +164,7 @@
 		</style>
 	</head>
 	<body>
-		<div id="slideshow" tabindex="1" onkeydown="goSlideKey(event);" onfocus="playback(false);" onfocusout="playback(true);" onmouseover="this.focus();">
+		<div id="slideshow" tabindex="1" onkeydown="goSlideKey(event);" onfocus="playback(false);" onfocusout="playback(true);" onmouseover="this.focus();" onmouseout="this.blur();">
 			<div id="slider">
 				<div id="playback" onmouseover="playback(false);" onmouseout="playback(true);" title="Paused">
 					<span></span><span></span>
