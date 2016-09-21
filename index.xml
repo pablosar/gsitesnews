@@ -573,8 +573,8 @@
 				swipe[nameY] = evt.touches[0].pageY;
 				
 				//Show the previous and next arrows
-				document.getElementById('prev').display = 'inline-block';
-				document.getElementById('next').display = 'inline-block';
+				document.getElementById('prev').style.display = 'inline-block';
+				document.getElementById('next').style.display = 'inline-block';
 			} else {
 				//Cancel the touch
 				cancelSwipe();					
@@ -617,8 +617,8 @@
 				}
 			}
 			//Hide the previous and next arrows
-			document.getElementById('prev').display = 'none';
-			document.getElementById('next').display = 'none';
+			document.getElementById('prev').style.display = 'none';
+			document.getElementById('next').style.display = 'none';
 		}
 		
 		gadgets.util.registerOnLoadHandler(getHtml);
