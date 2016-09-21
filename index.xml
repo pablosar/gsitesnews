@@ -164,12 +164,12 @@
 		</style>
 	</head>
 	<body>
-		<div id="slideshow" tabindex="1" onkeydown="goSlideKey(event);" onfocus="playback(false);" onfocusout="playback(true);">
+		<div id="slideshow" tabindex="1" onkeydown="goSlideKey(event);" onfocus="playback(false);" onfocusout="playback(true);" onmouseover="this.focus();">
 			<div id="slider">
 				<div id="playback" onmouseover="playback(false);" onmouseout="playback(true);" title="Paused">
 					<span></span><span></span>
 				</div>				
-				<div id="slider_inner" onmouseover="playback(false);" onmouseout="playback(true);" title="Paused">Loading...
+				<div id="slider_inner" onmouseover="playback(false);" onmouseout="playback(true);" title="Paused "ontouchstart="startSwipe(event)" ontouchend="endSwipe(event)" ontouchmove="startSwipe(event, 'X', 'Y')" ontouchcancel="cancelSwipe()">Loading...
 				</div>
 				<div id="prev" onclick="goSlide(-1);" title="Go to the previous slide">
 					<span></span>
@@ -201,6 +201,16 @@
 		var itemNum = 3;
 		//Use the first image as a cover for the slide
 		var imgCover = false;
+		//Swiping properties for smartphones/tablets
+		var swipe = {
+			'startX': 0,
+			'startY': 0,
+			'X': 0,
+			'Y': 0,
+			'fingers': 0
+		};
+		//The mininmum length of the swipe
+		var swipeMinLength = 72;
 		
 		function getHtml() {
 			//Get the user preferences
@@ -543,6 +553,62 @@
 				return imgSrc;
 			} else {
 				return '';
+			}
+		}
+		
+		function startSwipe(evt, nameX, nameY) {
+			//Set defaults for the X and Y, if its the first touch or its moving
+			nameX = typeof nameX !== 'undefined' ? nameX : 'startX';
+			nameY = typeof nameY !== 'undefined' ? nameY : 'startY';
+			//Prevent the default action for the swipe movement
+			evt.preventDefault();
+			//The swipe should be one finger touch
+			swipe['fingers'] = evt.touches.length;
+			//Ensure that only one finger is touching the screen
+			if(swipe['fingers'] == 1) {
+				//Get the x y coordinates of the touch
+				swipe[nameX] = evt.touches[0].pageX;
+				swipe[nameY] = evt.touches[0].pageY;
+			} else {
+				//Cancel the touch
+				cancelSwipe();					
+			}
+		}
+		
+		function endSwipe(evt) {				
+			//Prevent the default action for the swipe movement
+			evt.preventDefault();
+			
+			//Ensure that only one finger is touching the screen
+			if(swipe['fingers'] == 1) {
+				//Calculate the length in X and Y coordinates
+				var lengthX = swipe['X'] - swipe['startX'];
+				var lengthY = swipe['Y'] - swipe['startY'];
+				//Calculate the length of the swipe
+				var swipeLength = Math.round(Math.sqrt(Math.pow(lengthX,2) + Math.pow(lengthY,2)));
+				//Continue if the user swiped more than the minimum length
+				if(swipeLength >= swipeMinLength) {
+					//Calculate the length in radians
+					var angle = Math.atan2(lengthY, lengthX);
+					
+					if(Math.abs(angle) <= (Math.PI / 2)) {
+						goSlide(1);						
+					} else {
+						goSlide(-1);						
+					}
+				}
+			}
+			
+			//Reset the swipe
+			cancelSwipe();
+		}
+		
+		function cancelSwipe() {
+			//Reset the swipe data
+			for(var prop in swipe) {
+				if(swipe.hasOwnProperty(prop)) {
+					prop = 0;
+				}
 			}
 		}
 		
