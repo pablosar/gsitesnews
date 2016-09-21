@@ -456,7 +456,7 @@
 			
 			//If the boolean value is true
 			if(bool==true) {
-				console.log("The window timer on = "+window.timer);
+				//console.log("The window timer on = "+window.timer);
 				//Play the slider (reset the interval) and hide the pause icon
 				window.timer = setInterval(playSlide, window.interval);	
 				//console.log("-->The window timer on = "+window.timer);
@@ -467,7 +467,7 @@
 				obj.style.height = '';					
 				obj.style.top = '';					
 			} else {
-				console.log("The window timer off = "+window.timer);
+				//console.log("The window timer off = "+window.timer);
 				//Pause the slider (clear the interval) and show the pause icon
 				window.clearInterval(window.timer);	
 				//console.log("-->The window timer off = "+window.timer);
