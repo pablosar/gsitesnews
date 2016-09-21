@@ -442,11 +442,11 @@
 			}
 			
 			//Clear the interval
-			window.clearInterval(window.timer);
+			//window.clearInterval(window.timer);
 			//Go to the specific slide
 			playSlide(idx);
 			//Reset the interval
-			window.timer = setInterval(playSlide, window.interval);
+			//window.timer = setInterval(playSlide, window.interval);
 		}
 		
 		function playback(bool) {
@@ -459,7 +459,7 @@
 				console.log("The window timer on = "+window.timer);
 				//Play the slider (reset the interval) and hide the pause icon
 				window.timer = setInterval(playSlide, window.interval);	
-				console.log("-->The window timer on = "+window.timer);
+				//console.log("-->The window timer on = "+window.timer);
 				obj.style.opacity = 0;
 				obj.style.right = '';
 				obj.style.fontSize = '';
@@ -470,7 +470,7 @@
 				console.log("The window timer off = "+window.timer);
 				//Pause the slider (clear the interval) and show the pause icon
 				window.clearInterval(window.timer);	
-				console.log("-->The window timer off = "+window.timer);
+				//console.log("-->The window timer off = "+window.timer);
 				obj.style.opacity = 1;
 				obj.style.right = '10px';
 				obj.style.fontSize = '18pt';
