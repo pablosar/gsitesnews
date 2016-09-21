@@ -571,6 +571,10 @@
 				//Get the x y coordinates of the touch
 				swipe[nameX] = evt.touches[0].pageX;
 				swipe[nameY] = evt.touches[0].pageY;
+				
+				//Show the previous and next arrows
+				document.getElementById('prev').display = 'inline-block';
+				document.getElementById('next').display = 'inline-block';
 			} else {
 				//Cancel the touch
 				cancelSwipe();					
@@ -612,6 +616,9 @@
 					prop = 0;
 				}
 			}
+			//Hide the previous and next arrows
+			document.getElementById('prev').display = 'none';
+			document.getElementById('next').display = 'none';
 		}
 		
 		gadgets.util.registerOnLoadHandler(getHtml);
