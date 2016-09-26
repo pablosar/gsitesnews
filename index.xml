@@ -161,6 +161,39 @@
 				height: 50%;
 				background-color: #FFFFFF;
 			}
+			#swiper {
+				position: absolute;
+				display: none;
+				text-align: center;
+				bottom: 30px;
+				left: 100px;
+				width: 30px;
+				height: 30px;
+				z-index: 999999999;
+				background-color: rgba(0,0,0,0.25);
+				border-radius: 15px;
+				padding: 0px;
+				-webkit-transition: all 0.1s ease-in-out;
+				-moz-transition: all 0.1s ease-in-out;
+				-o-transition: all 0.1s ease-in-out;
+				transition: all 0.1s ease-in-out;
+			}
+			#swiper_next, #swiper_prev {
+				color: #ffffff;
+				position: absolute;
+				opacity: 0.75;
+				font-size: 25px;
+				-webkit-transition: all 0.1s ease-in-out;
+				-moz-transition: all 0.1s ease-in-out;
+				-o-transition: all 0.1s ease-in-out;
+				transition: all 0.1s ease-in-out;
+			}
+			#swiper_next {
+				right: 3px;
+			}
+			#swiper_prev {
+				left: 3px;
+			}
 		</style>
 	</head>
 	<body>
@@ -169,13 +202,17 @@
 				<div id="playback" onmouseover="playback(false);" onmouseout="playback(true);" title="Paused">
 					<span></span><span></span>
 				</div>				
-				<div id="slider_inner" tabindex="1" onkeydown="goSlideKey(event);" onmouseover="this.focus();playback(false);" onmouseout="this.blur();playback(true);" title="Paused "ontouchstart="startSwipe(event)" ontouchend="endSwipe(event)" ontouchmove="startSwipe(event, 'X', 'Y')" ontouchcancel="cancelSwipe()">Loading...
+				<div id="slider_inner" tabindex="1" onkeydown="goSlideKey(event);" onmouseover="this.focus();playback(false);" onmouseout="this.blur();playback(true);" title="Paused" ontouchstart="startSwipe(event)" ontouchend="endSwipe(event)" ontouchmove="startSwipe(event, 'X', 'Y')" ontouchcancel="cancelSwipe()">Loading...
 				</div>
 				<div id="prev" onclick="goSlide(-1);" title="Go to the previous slide">
 					<span></span>
 				</div>
 				<div id="next" onclick="goSlide(1);" title="Go to the next slide">
 					<span></span>
+				</div>
+				<div id="swiper" ontouchstart="startSwipe(event)" ontouchend="endSwipe(event)" ontouchmove="moveSwipe(event);" ontouchcancel="cancelSwipe()">
+					<span id="swiper_prev">&#8249;</span>
+					<span id="swiper_next">&#8250;</span>
 				</div>
 				<div id="idxs"></div>
 			</div>
@@ -203,12 +240,16 @@
 		var imgCover = false;
 		//Swiping properties for smartphones/tablets
 		var swipe = {
-			'startX': 0,
-			'startY': 0,
-			'X': 0,
-			'Y': 0,
-			'fingers': 0
-		};
+				'startX': 0,
+				'startY': 0,
+				'X': 0,
+				'Y': 0,
+				'posX': 0,
+				'width': 30,
+				'height': 30,
+				'angle': 0,
+				'fingers': 0
+			};
 		//The mininmum length of the swipe
 		var swipeMinLength = 72;
 		
@@ -364,6 +405,9 @@
 			if(aaHeight) {
 				gadgets.window.adjustHeight();					
 			}
+			
+			//Add the swiper for smartphones/tablets
+			addSwiper();
 			
 			//Start the slider
 			startSlider();
@@ -559,28 +603,65 @@
 		}
 		
 		function startSwipe(evt, nameX, nameY) {
-			//Set defaults for the X and Y, if its the first touch or its moving
-			nameX = typeof nameX !== 'undefined' ? nameX : 'startX';
-			nameY = typeof nameY !== 'undefined' ? nameY : 'startY';
-			//Prevent the default action for the swipe movement
-			evt.preventDefault();
-			//The swipe should be one finger touch
-			swipe['fingers'] = evt.touches.length;
-			//Ensure that only one finger is touching the screen
+				//Set defaults for the X and Y, if its the first touch or its moving
+				nameX = typeof nameX !== 'undefined' ? nameX : 'startX';
+				nameY = typeof nameY !== 'undefined' ? nameY : 'startY';
+				//Prevent the default action for the swipe movement
+				evt.preventDefault();
+				//The swipe should be one finger touch
+				swipe['fingers'] = evt.touches.length;
+				//Ensure that only one finger is touching the screen
+				if(swipe['fingers'] == 1) {
+					//Get the x y coordinates of the touch
+					swipe[nameX] = evt.touches[0].pageX;
+					swipe[nameY] = evt.touches[0].pageY;
+					console.log('X: '+swipe[nameX]);
+					//Stop the playback until the swipe is completed
+					//playback(false);
+				} else {
+					//Cancel the touch
+					cancelSwipe();					
+				}				
+			}
+		function moveSwipe(evt) {
 			if(swipe['fingers'] == 1) {
 				//Get the x y coordinates of the touch
-				swipe[nameX] = evt.touches[0].pageX;
-				swipe[nameY] = evt.touches[0].pageY;
+				swipe['X'] = evt.touches[0].pageX;
+				swipe['Y'] = evt.touches[0].pageY;
+				//console.log('X: '+swipe[nameX]);
+				//Stop the playback until the swipe is completed
+				//playback(false);
+				//Calculate the length in X and Y coordinates
+				var lengthX = swipe['X'] - swipe['startX'];
+				var lengthY = swipe['Y'] - swipe['startY'];
+													
+				//Calculate the length in radians
+				var angle = Math.atan2(lengthY, lengthX);
 				
-				//Show the previous and next arrows
-				document.getElementById('prev').style.display = 'inline-block';
-				document.getElementById('next').style.display = 'inline-block';
+				var obj = document.getElementById('swiper');
+				var next = document.getElementById('swiper_next');
+				var prev = document.getElementById('swiper_prev');
+				
+				lengthX = Math.abs(lengthX);
+				if(lengthX < 50) {
+					obj.style.width = obj.clientWidth + lengthX;
+					if(Math.abs(angle) <= (Math.PI / 2)) {
+						//next.style.color = 'red';
+						next.style.opacity = 1;
+						prev.style.opacity = 0;
+					} else {
+						obj.style.left = obj.offsetLeft - lengthX;
+						//console.log('Left: ' + obj.offsetLeft);
+						//prev.style.color = 'red';
+						prev.style.opacity = 1;
+						next.style.opacity = 0;
+					}
+				}					
 			} else {
 				//Cancel the touch
 				cancelSwipe();					
 			}
 		}
-		
 		function endSwipe(evt) {				
 			//Prevent the default action for the swipe movement
 			evt.preventDefault();
@@ -590,6 +671,7 @@
 				//Calculate the length in X and Y coordinates
 				var lengthX = swipe['X'] - swipe['startX'];
 				var lengthY = swipe['Y'] - swipe['startY'];
+				console.log('Final X: '+swipe['X']);
 				//Calculate the length of the swipe
 				var swipeLength = Math.round(Math.sqrt(Math.pow(lengthX,2) + Math.pow(lengthY,2)));
 				//Continue if the user swiped more than the minimum length
@@ -598,17 +680,28 @@
 					var angle = Math.atan2(lengthY, lengthX);
 					
 					if(Math.abs(angle) <= (Math.PI / 2)) {
-						goSlide(1);						
+						goSlide(1);
+						console.log('You moved right.');
 					} else {
-						goSlide(-1);						
+						goSlide(-1);
+						console.log('You moved left.');
 					}
+					
+					if(angle >= 0) {
+						console.log('You moved down.');
+					} else {
+						console.log('You moved up.');
+					}
+					
+					console.log('Swipe length ' + swipeLength);
 				}
 			}
 			
 			//Reset the swipe
 			cancelSwipe();
+			//Continue with the playback
+			//playback(true);				
 		}
-		
 		function cancelSwipe() {
 			//Reset the swipe data
 			for(var prop in swipe) {
@@ -616,9 +709,31 @@
 					prop = 0;
 				}
 			}
-			//Hide the previous and next arrows
-			document.getElementById('prev').style.display = 'none';
-			document.getElementById('next').style.display = 'none';
+			var obj = document.getElementById('swiper');
+			obj.style.left = swipe['posX'].toString() + 'px';
+			obj.style.width = swipe['width'].toString() + 'px';
+			var next = document.getElementById('swiper_next');
+			var prev = document.getElementById('swiper_prev');
+			//next.style.color = 'black';
+			//prev.style.color = 'black';
+			next.style.opacity = 0.75;
+			prev.style.opacity = 0.75;
+		}
+		function addSwiper() {				
+			//Set the position of the swiper to the center
+			if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {				
+				//If its smartphone show the swiper
+				//Get the width of the slider and calculate the swiper horizontal position
+				var sliderWidth = document.getElementById('slider').clientWidth;
+				swipe['posX'] = (sliderWidth - swipe['width']) / 2;
+				
+				//Show the swiper and locate it in the calculated position
+				var obj = document.getElementById('swiper');
+				obj.style.display = 'inline-block';					
+				obj.style.left = swipe['posX'].toString() + 'px';
+				obj.style.width = swipe['width'].toString() + 'px';
+				obj.style.height = swipe['height'].toString() + 'px';
+			}
 		}
 		
 		gadgets.util.registerOnLoadHandler(getHtml);
