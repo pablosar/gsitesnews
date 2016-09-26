@@ -202,7 +202,7 @@
 				<div id="playback" onmouseover="playback(false);" onmouseout="playback(true);" title="Paused">
 					<span></span><span></span>
 				</div>				
-				<div id="slider_inner" tabindex="1" onkeydown="goSlideKey(event);" onmouseover="this.focus();playback(false);" onmouseout="this.blur();playback(true);" title="Paused" ontouchstart="startSwipe(event)" ontouchend="endSwipe(event)" ontouchmove="startSwipe(event, 'X', 'Y')" ontouchcancel="cancelSwipe()">Loading...
+				<div id="slider_inner" tabindex="1" onkeydown="goSlideKey(event);" onmouseover="this.focus();playback(false);" onmouseout="this.blur();playback(true);" title="Paused">Loading...
 				</div>
 				<div id="prev" onclick="goSlide(-1);" title="Go to the previous slide">
 					<span></span>
