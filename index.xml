@@ -613,7 +613,7 @@
 					//Get the x y coordinates of the touch
 					swipe['startX'] = evt.touches[0].pageX;
 					swipe['startY'] = evt.touches[0].pageY;
-					console.log('X: '+swipe[nameX]);
+					
 					//Stop the playback until the swipe is completed
 					//playback(false);
 				} else {
@@ -626,7 +626,7 @@
 				//Get the x y coordinates of the touch
 				swipe['X'] = evt.touches[0].pageX;
 				swipe['Y'] = evt.touches[0].pageY;
-				//console.log('X: '+swipe[nameX]);
+				
 				//Stop the playback until the swipe is completed
 				//playback(false);
 				//Calculate the length in X and Y coordinates
