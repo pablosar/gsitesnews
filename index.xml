@@ -240,18 +240,19 @@
 		var imgCover = false;
 		//Swiping properties for smartphones/tablets
 		var swipe = {
-				'startX': 0,
-				'startY': 0,
-				'X': 0,
-				'Y': 0,
-				'posX': 0,
-				'width': 30,
-				'height': 30,
-				'angle': 0,
-				'fingers': 0
-			};
-		//The mininmum length of the swipe
-		var swipeMinLength = 72;
+			'startX': 0,
+			'startY': 0,
+			'X': 0,
+			'Y': 0,				
+			'angle': 0,
+			'fingers': 0
+		};
+		var swiper = {
+			'posX': 100,
+			'width': 30,
+			'height': 30,
+			'minLength': 72
+		};	
 		
 		function getHtml() {
 			//Get the user preferences
@@ -602,10 +603,7 @@
 			}
 		}
 		
-		function startSwipe(evt, nameX, nameY) {
-				//Set defaults for the X and Y, if its the first touch or its moving
-				nameX = typeof nameX !== 'undefined' ? nameX : 'startX';
-				nameY = typeof nameY !== 'undefined' ? nameY : 'startY';
+		function startSwipe(evt) {
 				//Prevent the default action for the swipe movement
 				evt.preventDefault();
 				//The swipe should be one finger touch
@@ -613,8 +611,8 @@
 				//Ensure that only one finger is touching the screen
 				if(swipe['fingers'] == 1) {
 					//Get the x y coordinates of the touch
-					swipe[nameX] = evt.touches[0].pageX;
-					swipe[nameY] = evt.touches[0].pageY;
+					swipe['startX'] = evt.touches[0].pageX;
+					swipe['startY'] = evt.touches[0].pageY;
 					console.log('X: '+swipe[nameX]);
 					//Stop the playback until the swipe is completed
 					//playback(false);
@@ -667,31 +665,31 @@
 			evt.preventDefault();
 			
 			//Ensure that only one finger is touching the screen
-			if(swipe['fingers'] == 1) {
+			if(swipe['fingers'] == 1 && !(swipe['X'] == 0 && swipe['Y'] == 0)) {
 				//Calculate the length in X and Y coordinates
 				var lengthX = swipe['X'] - swipe['startX'];
 				var lengthY = swipe['Y'] - swipe['startY'];
-				console.log('Final X: '+swipe['X']);
+				//console.log('Final X: '+swipe['X']);
 				//Calculate the length of the swipe
 				var swipeLength = Math.round(Math.sqrt(Math.pow(lengthX,2) + Math.pow(lengthY,2)));
 				//Continue if the user swiped more than the minimum length
-				if(swipeLength >= swipeMinLength) {
+				if(swipeLength >= swiper['minLength']) {
 					//Calculate the length in radians
 					var angle = Math.atan2(lengthY, lengthX);
 					
 					if(Math.abs(angle) <= (Math.PI / 2)) {
 						goSlide(1);
-						console.log('You moved right.');
+						//console.log('You moved right.');
 					} else {
 						goSlide(-1);
-						console.log('You moved left.');
+						//console.log('You moved left.');
 					}
 					
-					if(angle >= 0) {
+					/*if(angle >= 0) {
 						console.log('You moved down.');
 					} else {
 						console.log('You moved up.');
-					}
+					}*/
 					
 					console.log('Swipe length ' + swipeLength);
 				}
@@ -706,12 +704,12 @@
 			//Reset the swipe data
 			for(var prop in swipe) {
 				if(swipe.hasOwnProperty(prop)) {
-					prop = 0;
+					swipe[prop] = 0;
 				}
 			}
 			var obj = document.getElementById('swiper');
-			obj.style.left = swipe['posX'].toString() + 'px';
-			obj.style.width = swipe['width'].toString() + 'px';
+			obj.style.left = swiper['posX'].toString() + 'px';
+			obj.style.width = swiper['width'].toString() + 'px';
 			var next = document.getElementById('swiper_next');
 			var prev = document.getElementById('swiper_prev');
 			//next.style.color = 'black';
@@ -725,14 +723,14 @@
 				//If its smartphone show the swiper
 				//Get the width of the slider and calculate the swiper horizontal position
 				var sliderWidth = document.getElementById('slider').clientWidth;
-				swipe['posX'] = (sliderWidth - swipe['width']) / 2;
+				swiper['posX'] = (sliderWidth - swiper['width']) / 2;
 				
 				//Show the swiper and locate it in the calculated position
 				var obj = document.getElementById('swiper');
 				obj.style.display = 'inline-block';					
-				obj.style.left = swipe['posX'].toString() + 'px';
-				obj.style.width = swipe['width'].toString() + 'px';
-				obj.style.height = swipe['height'].toString() + 'px';
+				obj.style.left = swiper['posX'].toString() + 'px';
+				obj.style.width = swiper['width'].toString() + 'px';
+				obj.style.height = swiper['height'].toString() + 'px';
 			}
 		}
 		
